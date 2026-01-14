@@ -42,7 +42,7 @@ export default function GameCategories() {
           </div>
 
           <div className='flex justify-center items-center w-[72px] h-[12px] gap-[5px]'>
-            <div className={`bg-[#452154] hover:bg-[#FF5733] w-[20px] h-[8px] hover:w-[38px] hover:h-[12px] rounded-sm cursor-pointer`}></div>
+            <div className={`bg-[#FF5733] h-[8px] w-[38px] hover:h-[12px] rounded-sm cursor-pointer`}></div>
             <div className={`bg-[#452154] hover:bg-[#FF5733] w-[20px] h-[8px] hover:w-[38px] hover:h-[12px] rounded-sm cursor-pointer`}></div>
           </div>
         </div>
