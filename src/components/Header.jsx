@@ -1,8 +1,7 @@
 import Logo from "../icons/logo.svg?react";
 import Searchicon from "../icons/iconoir_search.svg?react";
-import Signup from "../icons/signup.svg?react";
-import Login from "../icons/login.svg?react";
 import Mobmenu from "../icons/mobile_menu.svg?react";
+import Arrowdown from "../icons/arrowdownheader.svg?react";
 export default function Header() {
     return (
 
@@ -11,10 +10,10 @@ export default function Header() {
             <div className="hidden md:block"> <Searchicon /> </div>
             <div className='hidden items-center justify-between md:flex lg:w-[811px] lg:h-[23px] font-Vazirmatn'>
                 <h1>Home</h1>
-                <h1>News</h1>
-                <h1>Store</h1>
-                <h1>Review</h1>
-                <h1>Guides</h1>
+                <h1 className="flex justify-center items-center gap-[4px]">News <Arrowdown /> </h1>
+                <h1 className="flex justify-center items-center gap-[4px]">Store <Arrowdown /> </h1>
+                <h1 className="flex justify-center items-center gap-[4px]">Review <Arrowdown /> </h1>
+                <h1 className="flex justify-center items-center gap-[4px]">Guides <Arrowdown /> </h1>
                 <h1>About Us</h1>
             </div>
             <div className="flex md:gap-[16px]">
