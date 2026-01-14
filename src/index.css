@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap");
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-main: #7d3c98;
+  --color-bgcolor: #261030;
+  --color-c1: #ffeeeb;
+  --color-c2: #ffb2a1;
+  --color-c3: #ff8e76;
+  --color-c4: #ffcbc0;
+  --color-c5: #ff795c;
+  --color-c6: #ff5733;
+  --color-c7: #e84f2e;
+  --color-c8: #b53e24;
+  --color-c9: #8c301c;
+  --color-c10: #6b2515;
+  --color-butdef: #7d3c98;
+  --color-butho: #713689;
+  --color-butsel: #64307a;
+  --font-Vazirmatn: "Vazirmatn", sans-serif;
+}
