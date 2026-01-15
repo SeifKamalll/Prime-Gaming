@@ -62,11 +62,11 @@ export default function HeroSection() {
 
 
   return (
-    <div className="relative flex w-full h-[486px] p-[24px] md:max-w-[1080px] md:h-[696px] lg:w-[1440px] lg:max-w-[1440px] lg:h-[860px] lg:p-[120px] bg-cover bg-center " style={{ backgroundImage: activeGame ? `url(${domain + activeGame?.cover?.url})` : `url(${Geralt})` }}>
+    <div className="relative flex justify-center items-center w-full h-[486px] md:h-[696px] lg:h-[860px] bg-cover bg-center " style={{ backgroundImage: activeGame ? `url(${domain + activeGame?.cover?.url})` : `url(${Geralt})` }}>
       <div className="absolute inset-0 bg-black/30"></div>
       <div className="absolute h-full left-0 top-0 max-w-[55%] md:bg-linear-to-r from-[#1C1B29] via-[#1C1B29] to-transparent"></div>
       <div className="absolute bottom-0 right-0 w-full h-[40%] md:bg-linear-to-t from-[#1C1B29] to-transparent"></div>
-      <div className="hidden md:flex z-40 w-full md:max-w-[884px] md:max-h-[500px] md:gap-[20px] lg:w-[1200px] lg:max-w-[1200px lg:h-[620px] lg:max-h-[620px] lg:gap-[36px]">
+      <div className="hidden md:flex justify-center items-center z-40 w-full md:max-h-[500px] md:gap-[20px] lg:h-[620px] lg:max-h-[620px] lg:gap-[36px]">
         <div className="flex flex-col justify-end md:max-w-[323px] md:max-h-[500px] md:gap-[32px] lg:w-[333px] lg:max-w-[333px] lg:h-[620px] lg:max-h-[620px]">
           <div className="flex flex-col md:w-full md:h-auto md:gap-[8px] lg:h-auto">
             <h1 className="font-bold text-[40px]">{activeGame?.name}</h1>

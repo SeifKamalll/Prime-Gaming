@@ -27,8 +27,8 @@ export default function GameCategories() {
   }, []);
 
   return (
-    <div className='flex flex-col justify-center lg:items-center h-[254px] px-[24px] w-full gap-[24px] md:max-w-[1080px] md:h-[449px] lg:w-[1440px] lg:h-[527px] lg:gap-[32px] lg:px-[120px]'>
-      <div className='flex w-[382px] items-center h-[36px] md:w-full md:h-[51px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[51px] '>
+    <div className='flex flex-col justify-center items-center h-[254px] w-full gap-[24px] md:h-[449px] lg:h-[527px] lg:gap-[32px]'>
+      <div className='flex w-[382px] items-center h-[36px] md:w-[884px] md:h-[51px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[51px] '>
 
         <h1 className='w-[280px] h-[31px] text-[20px] md:w-[812px] md:h-[38px] md:text-[24px] lg:w-[1128px] lg:h-[38px]'>Game Categories</h1>
         <div className="md:hidden cursor-pointer w-[102px] px-[16px] py-[6px]"> <Viewall /> </div>
@@ -50,7 +50,7 @@ export default function GameCategories() {
 
       </div>
 
-      <div className='flex flex-nowrap overflow-x-auto md:overflow-visible md:grid md:grid-cols-4 md:grid-rows-2 w-[573px] h-[210px] gap-[12px] md:w-full md:max-w-[884px] md:h-[374px] md:gap-[20px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[444px] lg:gap-x-[24px]'>
+      <div className='flex flex-nowrap overflow-x-auto md:overflow-visible md:grid md:grid-cols-4 md:grid-rows-2 w-[406px] md:w-full md:max-w-[884px] h-[210px] gap-[12px] md:h-[374px] md:gap-[20px] lg:max-w-[1200px] lg:h-[444px] lg:gap-x-[24px]'>
         {categories.map((el, index) => {
           const isBig = index === 0 || index === 5;
 
