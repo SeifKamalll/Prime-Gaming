@@ -27,17 +27,17 @@ export default function GameCategories() {
   }, []);
 
   return (
-    <div className='flex flex-col justify-center items-center w-[573px] h-[270px] gap-[24px] md:w-[1080px] md:h-[449px] md:px-[98px] lg:w-[1440px] lg:h-[527px] lg:gap-[32px] lg:px-[120px]'>
-      <div className='flex w-[382px] items-center h-[36px] md:w-[884px] md:h-[51px] lg:w-[1200px] lg:h-[51px] '>
+    <div className='flex flex-col justify-center lg:items-center h-[254px] px-[24px] w-full gap-[24px] md:max-w-[1080px] md:h-[449px] lg:w-[1440px] lg:h-[527px] lg:gap-[32px] lg:px-[120px]'>
+      <div className='flex w-[382px] items-center h-[36px] md:w-full md:h-[51px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[51px] '>
 
         <h1 className='w-[280px] h-[31px] text-[20px] md:w-[812px] md:h-[38px] md:text-[24px] lg:w-[1128px] lg:h-[38px]'>Game Categories</h1>
         <div className="md:hidden cursor-pointer w-[102px] px-[16px] py-[6px]"> <Viewall /> </div>
         <div className='hidden md:flex md:flex-col md:w-[72px] md:h-[51px] md:gap-[8px]'>
           <div className='flex md:gap-[8px] md:w-[72px] md:h-[31px]'>
-            <button className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:h-[30px] border rounded-md text-[#ededed]">
+            <button className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
               <GoArrowLeft size={20} />
             </button>
-            <button className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:h-[30px] border rounded-md text-[#ededed]">
+            <button className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
               <GoArrowRight size={20} />
             </button>
           </div>
@@ -50,14 +50,14 @@ export default function GameCategories() {
 
       </div>
 
-      <div className='flex flex-nowrap overflow-x-auto md:overflow-visible md:grid md:grid-cols-4 md:grid-rows-2 md:gap-[20px] lg:gap-[24px] w-[573px] h-[210px] gap-[12px] md:w-[884px] md:h-[374px] md:gap-[20px] lg:w-[1200px] lg:h-[444px] lg:gap-[24px]'>
+      <div className='flex flex-nowrap overflow-x-auto md:overflow-visible md:grid md:grid-cols-4 md:grid-rows-2 w-[573px] h-[210px] gap-[12px] md:w-full md:max-w-[884px] md:h-[374px] md:gap-[20px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[444px] lg:gap-x-[24px]'>
         {categories.map((el, index) => {
           const isBig = index === 0 || index === 5;
 
           return (
             <div
               key={el.id}
-              className={`relative rounded-xl md:transition-transform md:duration-300 md:ease-out md:hover:-translate-y-3 min-w-[280.5px] h-[194px] bg-center bg-[#1C1B29] cursor-pointer overflow-hidden ${isBig ? "col-span-2" : ""
+              className={`relative rounded-xl md:transition-transform md:duration-300 md:ease-out md:hover:-translate-y-2 min-w-[280.5px] w-[573px] md:w-full md:max-w-[884px] h-[194px] bg-center bg-[#1C1B29] cursor-pointer overflow-hidden ${isBig ? "col-span-2" : ""
                 }`}
               style={{ backgroundImage: `url(${domain + el.cover?.url})` }}
             >

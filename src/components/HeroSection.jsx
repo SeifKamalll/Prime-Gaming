@@ -62,12 +62,12 @@ export default function HeroSection() {
 
 
   return (
-    <div className="relative flex w-[430px] h-[486px] p-[24px] md:w-[1080px] md:h-[696px] md:p-[98px] lg:w-[1440px] lg:h-[860px] lg:p-[120px] bg-cover bg-center " style={{ backgroundImage: activeGame ? `url(${domain + activeGame?.cover?.url})` : `url(${Geralt})` }}>
+    <div className="relative flex w-full h-[486px] p-[24px] md:max-w-[1080px] md:h-[696px] lg:w-[1440px] lg:max-w-[1440px] lg:h-[860px] lg:p-[120px] bg-cover bg-center " style={{ backgroundImage: activeGame ? `url(${domain + activeGame?.cover?.url})` : `url(${Geralt})` }}>
       <div className="absolute inset-0 bg-black/30"></div>
-      <div className="absolute h-full left-0 top-0 w-[55%] md:bg-linear-to-r from-[#1C1B29] via-[#1C1B29] to-transparent"></div>
+      <div className="absolute h-full left-0 top-0 max-w-[55%] md:bg-linear-to-r from-[#1C1B29] via-[#1C1B29] to-transparent"></div>
       <div className="absolute bottom-0 right-0 w-full h-[40%] md:bg-linear-to-t from-[#1C1B29] to-transparent"></div>
-      <div className="hidden md:flex z-40 md:w-[884px] md:h-[500px] md:gap-[20px] lg:w-[1200px] lg:h-[620px] lg:gap-[36px]">
-        <div className="flex flex-col justify-end md:w-[323px] md:h-[500px] md:gap-[32px] lg:w-[333px] lg:h-[620px]">
+      <div className="hidden md:flex z-40 w-full md:max-w-[884px] md:max-h-[500px] md:gap-[20px] lg:w-[1200px] lg:max-w-[1200px lg:h-[620px] lg:max-h-[620px] lg:gap-[36px]">
+        <div className="flex flex-col justify-end md:max-w-[323px] md:max-h-[500px] md:gap-[32px] lg:w-[333px] lg:max-w-[333px] lg:h-[620px] lg:max-h-[620px]">
           <div className="flex flex-col md:w-full md:h-auto md:gap-[8px] lg:h-auto">
             <h1 className="font-bold text-[40px]">{activeGame?.name}</h1>
             <h1 className="text-[16px] font-extralight tracking-normal text-justify leading-[25px]">{activeGame?.des}</h1>
@@ -99,10 +99,10 @@ export default function HeroSection() {
           <div className="flex flex-col md:w-full md:h-[243px] md:gap-[20px] lg:w-full lg:h-[304px]">
             <div className="flex justify-center items-center md:w-full md:h-[44px] md:gap-[10px]">
               <h1 className="md:w-[433px] md:h-[31px] lg:w-[723px]">The Most <span className="text-[#FF5733]">Pupular</span> Games</h1>
-              <button onClick={() => { changeGame('prev') }} className="cursor-pointer hover:h-[50px] border rounded-md p-[11px] text-[#ededed]">
+              <button onClick={() => { changeGame('prev') }} className="cursor-pointer hover:scale-110 transition-[opacity,scale] border rounded-md p-[11px] text-[#ededed]">
                 <GoArrowLeft className="" size={20} />
               </button>
-              <button onClick={() => { changeGame('next') }} className="cursor-pointer hover:h-[50px] border rounded-md p-[11px] text-[#ededed]">
+              <button onClick={() => { changeGame('next') }} className="cursor-pointer hover:scale-110 transition-[opacity,scale] border rounded-md p-[11px] text-[#ededed]">
                 <GoArrowRight size={20} />
               </button>
             </div>
@@ -141,10 +141,10 @@ export default function HeroSection() {
       <div className="md:hidden flex flex-col w-full h-full gap-[48px] justify-end items-center z-40">
 
         <div className="flex w-[382px] h-[40px] justify-between">
-          <button onClick={() => { changeGame('prev') }} className="cursor-pointer hover:size-[45px] border rounded-md p-[10px] text-[#ededed]">
+          <button onClick={() => { changeGame('prev') }} className="cursor-pointer hover:scale-105 transition-[opacity,scale] border rounded-md p-[10px] text-[#ededed]">
             <GoArrowLeft size={20} />
           </button>
-          <button onClick={() => { changeGame('next') }} className="cursor-pointer hover:size-[45px] border rounded-md p-[10px] text-[#ededed]">
+          <button onClick={() => { changeGame('next') }} className="cursor-pointer hover:scale-105 transition-[opacity,scale] border rounded-md p-[10px] text-[#ededed]">
             <GoArrowRight size={20} />
           </button>   </div>
 

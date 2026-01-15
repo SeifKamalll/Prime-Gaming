@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { domain } from "../store";
 import Calicon from "../icons/calender icon.svg?react";
 import Micon from "../icons/M yellow Rate.svg?react";
+import Trendarrow from "../icons/trending arrow.svg?react";
 import axios from "axios";
 
 export default function TrendingGames() {
@@ -21,8 +22,8 @@ export default function TrendingGames() {
 
 
     return (
-        <div className='flex flex-col justify-center items-center w-[573px] h-[270px] gap-[24px] md:w-[1080px] md:h-[449px] md:px-[98px] lg:w-[1440px] lg:h-[527px] lg:gap-[32px] lg:px-[120px]'>
-            <div className='flex w-[382px] justify-between items-center h-[36px] md:w-[884px] md:h-[51px] lg:w-[1200px] lg:h-[51px] '>
+        <div className='flex flex-col justify-center w-full pl-[24px] lg:items-center md:items-center gap-[24px] md:max-w-[1080px] md:h-[405px] lg:w-[1440px] lg:max-w-[1440px] lg:h-[453px] lg:gap-[32px] lg:px-[120px]'>
+            <div className='flex justify-between items-center h-[36px] w-[382px] md:w-full md:h-[51px] lg:max-w-[1200px] lg:h-[51px] '>
 
                 <div className="flex w-[280px] h-[31px] md:w-[812px] md:h-[38px] md:w-[704px] md:h-[40px] lg:gap-[48px] lg:h-[44px]">
                     <h1 className='text-[20px] md:text-[24px]'>Trending Games</h1>
@@ -33,10 +34,10 @@ export default function TrendingGames() {
 
                 <div className='hidden md:flex md:flex-col md:w-[96px] md:h-[51px] md:gap-[8px]'>
                     <div className='flex md:gap-[8px] md:w-[96px] md:h-[31px]'>
-                        <button className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:h-[30px] border rounded-md text-[#ededed]">
+                        <button className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
                             <GoArrowLeft size={20} />
                         </button>
-                        <button className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:h-[30px] border rounded-md text-[#ededed]">
+                        <button className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
                             <GoArrowRight size={20} />
                         </button>
                     </div>
@@ -52,29 +53,29 @@ export default function TrendingGames() {
 
 
             </div>
-                <div className="flex w-[533.6px] h-[297px] gap-[16px] md:w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:h-[370px]">
-                    {trending.map((el, index) => (
-                        <div key={el.id} className="flex flex-col items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] md:transition-transform md:duration-300 md:ease-out md:hover:-translate-y-3">
-                            <img src={domain + el.image[0]?.url} alt={el.name} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
-                            <h1 className="w-[151.2px] h-[25px] text-[16px] lg:w-[207.2px] ">{el.name}</h1>
-                            <div className="flex justify-between items-center w-[151.2px] h-[25px] lg:w-[207.2px]">
-                                <div className="flex w-[75.6px] h-[20px] gap-[4px] lg:w-[97.6px]"> <Calicon /> <h1 className="text-[12px]">{el.date}</h1> </div>
-                                <div className="flex w-[75.6px] justify-center items-center h-[25px] gap-[4px] lg:w-[97.6px]"> <Micon />
-                                    <h1 className="text-[16px] text-[#FFCC00]">{el?.rate}</h1>
-                                    <h1 className="text-[12px] text-[#979797]">/100</h1>
-                                </div>
+            <div className="flex w-[533.6px] h-[297px] overflow-x-auto gap-[16px] md:w-full md:max-w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[370px]">
+                {trending.map((el, index) => (
+                    <div key={el.id} className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
+                        <img src={domain + el.image[0]?.url} alt={el.name} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
+                        <h1 className="w-[151.2px] h-[25px] text-[16px] lg:w-[207.2px] ">{el.name}</h1>
+                        <div className="flex justify-between items-center w-[151.2px] h-[25px] lg:w-[207.2px]">
+                            <div className="flex w-[75.6px] h-[20px] gap-[4px] lg:w-[97.6px]"> <Calicon className='w-[20px] h-[20px]' /> <h1 className="text-[12px]">{el.date}</h1> </div>
+                            <div className="flex w-[75.6px] justify-center items-center h-[25px] gap-[4px] lg:w-[97.6px]"> <Micon className='w-[20px] h-[20px]' />
+                                <h1 className="text-[16px] text-[#FFCC00]">{el?.rate}</h1>
+                                <h1 className="text-[12px] text-[#979797]">/100</h1>
                             </div>
-
-                            <div className="flex flex-col items-center justify-center lg:justify-between lg:flex-row w-[151.2px] h-[25px] md:w-[85px] md:h-[52px] md:gap-[8px] lg:w-[207.2px] lg:h-[25px]">
-                                <div></div>
-                                <div></div>
-                            </div>
-
                         </div>
-                    ))
 
-                    }
-                </div>
+                        <div className="flex flex-col items-center justify-center lg:justify-between lg:flex-row w-[151.2px] h-[25px] md:w-[85px] md:h-[52px] md:gap-[8px] lg:w-[207.2px] lg:h-[25px]">
+                            <div className="flex justify-center items-center md:w-[85px] md:h-[25px] gap-[8px]"> <del className="text-[#979797] text-[12px]"> {el.price + "$"}</del> <h1 className="text-[16px]"> {el.disprice + "$"} </h1> <h1 className="bg-[#FF5733] text-[10px] w-[25px] h-[14px] font-extralight text-center rounded-md"> {Math.round(((el.price - el.disprice) / el.price) * 100) + "$"} </h1>  </div>
+                            <div className="hidden md:flex justify-center items-center md:gap-[4px] md:w-[67px] md:h-[19px]"><h1 className="text-[12px] cursor-pointer">Buy Now</h1> <Trendarrow className='w-[15px]' /> </div>
+                        </div>
+
+                    </div>
+                ))
+
+                }
+            </div>
 
         </div>
     )
