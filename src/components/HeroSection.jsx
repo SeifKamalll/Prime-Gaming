@@ -7,7 +7,7 @@ import axios from "axios";
 import { domain } from "../store";
 import noimage from "../images/Image-not-found.png"
 export default function HeroSection() {
-  const [games, setgames] = useState([])
+  const [games, setGames] = useState([])
   const [activeGame, setActiveGame] = useState(null);
   const [popularGames, setPopularGames] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,7 +18,7 @@ export default function HeroSection() {
     axios.get(url1, {
       params: { populate: "*" },
     }).then(res => {
-      setgames(res.data.data);
+      setGames(res.data.data);
     });
 
     axios.get(url1, { params: { populate: '*', sort: ["order:asc"], filters: { Popular: { $eq: true } } } })
@@ -110,7 +110,7 @@ export default function HeroSection() {
               {popularGames.map((el, index) => (
                 <div key={el.documentId} className="hover-3d cursor-pointer" onClick={() => { setActiveGame(el); setCurrentIndex(index); }}>
                   <figure className={`lg:w-[153.4px] md:h-[220px] rounded-2xl ${activeGame?.id === el.id ? "md:h-[240px]" : ""}`}>
-                    <img src={el.image ? domain + el.image[0].url : noimage} className="md:h-full" alt="Tailwind CSS 3D card" />
+                    <img src={el.image ? domain + el.image?.[0].url : noimage} className="md:h-full" alt="Tailwind CSS 3D card" />
                   </figure>
                   {/* 8 empty divs needed for the 3D effect */}
                   <div></div>

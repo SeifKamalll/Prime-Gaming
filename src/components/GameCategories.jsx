@@ -6,6 +6,9 @@ import Viewall from "../icons/viewall.svg?react"
 
 export default function GameCategories() {
   const [categories, setCategories] = useState([]);
+  const [activeDot, setActiveDot] = useState(0)
+
+  const dotsCount = 2;
 
   useEffect(() => {
     axios
@@ -34,17 +37,18 @@ export default function GameCategories() {
         <div className="md:hidden cursor-pointer w-[102px] px-[16px] py-[6px]"> <Viewall /> </div>
         <div className='hidden md:flex md:flex-col md:w-[72px] md:h-[51px] md:gap-[8px]'>
           <div className='flex md:gap-[8px] md:w-[72px] md:h-[31px]'>
-            <button className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+            <button onClick={() => { setActiveDot((prev) => (prev - 1 + dotsCount) % dotsCount) }} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
               <GoArrowLeft size={20} />
             </button>
-            <button className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+            <button onClick={() => setActiveDot((prev) => (prev + 1) % dotsCount)} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
               <GoArrowRight size={20} />
             </button>
           </div>
 
           <div className='flex justify-center items-center w-[72px] h-[12px] gap-[5px]'>
-            <div className={`bg-[#FF5733] h-[12px] w-[38px] hover:bg-[#ff2f00] rounded-sm cursor-pointer`}></div>
-            <div className={`bg-[#452154] hover:bg-[#ff2f00]  w-[20px] h-[8px] hover:w-[38px] hover:h-[12px] rounded-sm cursor-pointer`}></div>
+            {[0, 1].map((index) => (
+              <div key={index} onClick={() => { setActiveDot(index) }} className={`${activeDot === index ? "bg-[#FF5733] h-[12px] w-[38px]" : "w-[20px] h-[8px] bg-[#452154]"} hover:w-[38px] hover:h-[12px] hover:bg-[#ff2f00] rounded-sm cursor-pointer`}></div>
+            ))}
           </div>
         </div>
 
