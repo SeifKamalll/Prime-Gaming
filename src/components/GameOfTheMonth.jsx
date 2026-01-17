@@ -3,6 +3,9 @@ import useGameStore, { domain } from "../store";
 import axios from "axios";
 import Micon from "../icons/M yellow Rate.svg?react";
 import Calicon from "../icons/calender icon.svg?react";
+import RAM from "../icons/RAMicon.svg?react";
+import GPU from "../icons/GPUicon.svg?react";
+import CPU from "../icons/CPUicon.svg?react";
 import trailer1 from "../Games/gameofthemonth/trailer1.png?react"
 import trailer2 from "../Games/gameofthemonth/trailer2.png?react"
 import trailer3 from "../Games/gameofthemonth/trailer3.png?react"
@@ -27,11 +30,11 @@ export default function GameOfTheMonth() {
 
 
     return (
-        <div className="flex flex-col w-[382px] h-[1920px] gap-[24px] md:w-[884px] md:h-[847px] lg:w-[1200px] lg:h-[856px]">
+        <div className="flex flex-col w-[382px] h-[1920px] gap-[24px] md:w-[884px] md:h-[847px] lg:w-[1200px] lg:h-[856px] lg:gap-[32px]">
             {/* Header Text */}
             <div className="flex w-full h-[38px] lg:px-[120px] justify-center items-center"> <h1 className="text-[24px]">Game Of The Month</h1> </div>
             {/* Game Details */}
-            <div className="flex flex-col md:flex-row w-full h-[881px] md:h-[452px] lg:h-[457px] gap-[24px] lg:gap-[36px]">
+            <div className="flex flex-col md:flex-row w-full h-[905px] md:h-[452px] lg:h-[457px] gap-[24px] lg:gap-[36px]">
                 {/* Left Div / in Mobile First */}
                 <div className="flex flex-col w-full h-[490px] md:w-[430px] md:h-[452px] lg:w-[582px] lg:h-[457px] gap-[16px]">
                     <div className="flex flex-col w-full h-[193px] gap-[8px] md:h-[171px] lg:h-[189px]">
@@ -45,7 +48,7 @@ export default function GameOfTheMonth() {
                             </div>
 
                             <div className="flex flex-col items-center md:justify-between w-[177px] h-full gap-[16px] md:w-[201px] md:gap-0 lg:w-[277px]">
-                                <div className="availableFor flex flex-col items-center w-full h-[79px] lg:h-[54px]"> <h1 className="text-[20px]">Available For:</h1> <h1 className="text-[16px] text-[#979797]"> {game?.platforms?.slice(0,3).map((el) => (el.name)).join(" - ")} </h1> </div>
+                                <div className="availableFor flex flex-col items-center w-full h-[79px] lg:h-[54px]"> <h1 className="text-[20px]">Available For:</h1> <h1 className="text-[16px] text-[#979797]"> {game?.platforms?.slice(0, 3).map((el) => (el.name)).join(" - ")} </h1> </div>
                                 <div className="Genre flex flex-col items-center w-full h-[54px]"> <h1 className="text-[20px]">Genre:</h1> <h1 className="text-[16px] text-[#979797]">{game?.genres?.map((el) => el.name).join(" ")}</h1> </div>
                             </div>
                         </div>
@@ -87,6 +90,61 @@ export default function GameOfTheMonth() {
                     </div>
                     <div className="flex items-center w-full h-[84px] gap-[8px] lg:gap-[12px]">
                         <img className="w-[157px] h-[84px] cursor-pointer" src={trailer1} alt="trailer" /><img className="w-[67px] h-[60px] md:w-[83px] lg:w-[129.67px] cursor-pointer" src={trailer2} alt="trailer" /><img className="w-[67px] h-[60px] md:w-[83px] lg:w-[129.67px] cursor-pointer" src={trailer3} alt="trailer" /><img className="w-[67px] h-[60px] md:w-[83px] lg:w-[129.67px] cursor-pointer" src={trailer4} alt="trailer" />
+                    </div>
+                </div>
+            </div>
+            {/* System Requirments */}
+            <div className="flex flex-col md:flex-row w-full h-[929px] gap-[24px] md:h-[309px] md:gap-[36px] lg:h-[297px]">
+                <div className="firstSec flex flex-col w-full h-[286px] gap-[12px] md:w-[270.67px] md:h-full lg:w-[376px]">
+                    <h1 className="text-[16px] lg:text-[20px]"><span className="text-[#FF5733]">Minimum</span> System Requirments</h1>
+                    <div className="flex flex-col w-full h-[249px] md:h-[272px] lg:h-[249px] gap-[8px]">
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">OS:</span> Windows 10 64-Bit Or Newer</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">CPU:</span> Intel Core i5-8400 / AMD 5 1600</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">Memory:</span> 16GB RAM</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">GPU:</span> NVIDIA GeForce GTX 1060 (6GB) / AMD 5 1600</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">DirectX:</span> Version 11</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">Storage:</span> 130GB Available Space</h1>
+                    </div>
+                </div>
+                <div className="SecondSec flex flex-col w-full h-[286px] gap-[12px] md:w-[270.67px] md:h-full lg:w-[376px]">
+                    <h1 className="text-[16px] lg:text-[20px]"><span className="text-[#FF5733]">Minimum</span> System Requirments</h1>
+                    <div className="flex flex-col w-full h-[249px] md:h-[272px] lg:h-[249px] gap-[8px]">
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">OS:</span> Windows 10 64-Bit Or Newer</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">CPU:</span> Intel Core i7-9700 / AMD Ryzen 5 5500</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">Memory:</span> 16GB RAM</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">GPU:</span> NVIDIA GeForce GTX 2060 / AMD Radeon RX 5700Xt</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">DirectX:</span> Version 12</h1>
+                        <h1 className="text-[16px] text-[#B9B9B9]"><span className="text-[20px] text-white">Storage:</span> 130GB Available Space</h1>
+                    </div>
+                </div>
+                <div className="ThirdSec bg-[#181724] rounded-2xl flex flex-col justify-center items-center w-full h-[309px] px-[16px] py-[8px] md:w-[270.67px] md:h-full lg:w-[376px] gap-[12px]">
+                    <div className="flex flex-col w-full h-[189px] gap-[12px] lg:h-[181px] lg:gap-[8px]">
+                        <div className="flex flex-col w-full h-[55px] gap-[4px]">
+                            <h1 className="tex-[12px] h-[19px]">RAM</h1>
+                            <div className="w-full flex items-center gap-[4px] h-[32px] border rounded pl-[8px]">
+                                <RAM className="w-[24px] pb-[2px]"/>
+                                <input className="w-full outline-none text-[12px]" placeholder="Enter Your RAM Storage" />
+                            </div>
+                        </div>
+                        <div className="flex flex-col w-full h-[55px] gap-[4px]">
+                            <h1 className="tex-[12px] h-[19px]">GPU</h1>
+                            <div className="w-full flex items-center gap-[4px] h-[32px] border rounded pl-[8px]">
+                                <GPU className="w-[24px] pb-[2px]"/>
+                                <input className="w-full outline-none text-[12px]" placeholder="Enter Your GPU State" />
+                            </div>
+                        </div>
+                        <div className="flex flex-col w-full h-[55px] gap-[4px]">
+                            <h1 className="tex-[12px] h-[19px]">CPU</h1>
+                            <div className="w-full flex items-center gap-[4px] h-[32px] border rounded pl-[8px]">
+                                <CPU className="w-[24px] pb-[2px]"/>
+                                <input className="w-full outline-none text-[12px]" placeholder="Enter Your CPU Details" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className="flex flex-col w-full h-[92px] gap-[12px] lg:h-[88px] lg:gap-[8px]">
+                        <button className="btn rounded-full bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white w-[185px] w-full h-[40px] md:px-[24px] md:py-[8px]">Can I Run It?</button>
+                        <button className="btn rounded-full border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white w-full h-[40px] px-[24px] py-[8px]">Test My PC Automatically</button>
                     </div>
                 </div>
             </div>
