@@ -21,3 +21,7 @@
   --color-butsel: #64307a;
   --font-Vazirmatn: "Vazirmatn", sans-serif;
 }
+
+
+
+/* @custom-variant dark (&:where(.dark, .dark *)); */

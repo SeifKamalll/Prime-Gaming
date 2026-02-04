@@ -52,7 +52,6 @@ export default function TrendingGames() {
                 </div>
 
 
-
             </div>
             <div className="flex w-[406px] md:w-full h-[297px] overflow-x-auto gap-[16px] md:max-w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[370px]">
                 {trending?.map((el, index) => (
