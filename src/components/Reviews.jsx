@@ -62,7 +62,7 @@ export default function Reviews() {
                     <img src={domain + el.image?.[0]?.url} alt="" className="w-full h-[194px] md:w-[140px] md:h-[180px] lg:h-[212px] object-cover" />
                     <div className="flex flex-col w-[294px] h-[255px] gap-[16px] md:w-[540px] md:h-[180px] md:gap-[8px] lg:w-[306px] lg:h-[212px]">
                         <div className="flex flex-col">
-                            <h1 className="text-[16px]">{el.name} <span className="text-[#979797]">({el.date})</span></h1>
+                            <h1 className="text-[16px]">{el.name} <span className="text-[#979797]">({el.release})</span></h1>
                             <hr />
                         </div>
                         <h1 className="text-[12px] text-[#979797] md:h-[114px] overflow-auto capitalize text-justify">{el.description}</h1>

@@ -7,28 +7,26 @@ import Micon from "../icons/M yellow Rate.svg?react";
 import Trendarrow from "../icons/trending arrow.svg?react";
 import axios from "axios";
 
-export default function TrendingGames() {
-    const [trending, setTrending] = useState([])
+export default function UpcomingGames() {
+    const [upcoming, setUpcoming] = useState([])
     const [activeDot, setActiveDot] = useState(0)
-    
+
     const dotsCount = 4;
 
     useEffect(() => {
         let url1 = domain + "/api/games";
-        axios.get(url1, { params: { populate: '*', filters: { trending: { $eq: true } } } })
+        axios.get(url1, { params: { populate: '*', filters: { upcoming: { $eq: true } } } })
             .then((res) => {
                 console.log(res.data.data)
-                setTrending(res.data.data)
+                setUpcoming(res.data.data)
             })
     }, [])
-
-
     return (
         <div className='flex flex-col justify-center w-full md:w-[884px] lg:w-[1200px] items-center gap-[24px] md:h-[405px] lg:h-[453px] lg:gap-[32px]'>
             <div className='flex justify-center items-center h-[36px] w-full md:h-[51px] lg:max-w-[1200px] lg:h-[51px] '>
 
                 <div className="flex w-[280px] h-[31px] md:w-[812px] md:h-[38px] md:w-[704px] lg:w-[1200px] md:h-[40px] lg:gap-[48px] lg:h-[44px]">
-                    <h1 className='text-[20px] md:text-[24px]'>Trending Games</h1>
+                    <h1 className='text-[20px] md:text-[24px]'>UpComing Games</h1>
                     <div className="hidden md:block cursor-pointer w-[102px] px-[16px]"> <Viewall /> </div>
                 </div>
 
@@ -36,7 +34,7 @@ export default function TrendingGames() {
 
                 <div className='hidden md:flex md:flex-col md:w-[96px] md:h-[51px] md:gap-[8px]'>
                     <div className='flex md:gap-[8px] md:w-[96px] md:h-[31px]'>
-                        <button onClick={()=>{setActiveDot((prev) => (prev - 1 + dotsCount) % dotsCount)}} className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+                        <button onClick={() => { setActiveDot((prev) => (prev - 1 + dotsCount) % dotsCount) }} className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
                             <GoArrowLeft size={20} />
                         </button>
                         <button onClick={() => setActiveDot((prev) => (prev + 1) % dotsCount)} className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
@@ -54,23 +52,17 @@ export default function TrendingGames() {
 
             </div>
             <div className="flex w-[406px] md:w-full h-[297px] overflow-x-auto gap-[16px] md:max-w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[370px]">
-                {trending?.map((el, index) => (
+                {upcoming?.map((el, index) => (
                     <div key={el.id} className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
-                        <img src={domain + el.image?.[0]?.url} alt={el.name} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
-                        <h1 className="w-[151.2px] h-[25px] text-[16px] lg:w-[207.2px] ">{el.name}</h1>
-                        <div className="flex justify-between items-center w-[151.2px] h-[25px] lg:w-[207.2px]">
-                            <div className="flex w-[75.6px] items-center h-[20px] gap-[4px] lg:w-[97.6px]"> <Calicon className='w-[20px]' /> <h1 className="text-[12px] text-[#979797]">{el.release}</h1> </div>
-                            <div className="flex w-[75.6px] justify-center items-center h-[25px] gap-[4px] lg:w-[97.6px]"> <Micon className='w-[20px] h-[20px]' />
-                                <h1 className="text-[16px] text-[#FFCC00]">{el?.rate}</h1>
-                                <h1 className="text-[12px] text-[#979797]">/100</h1>
+                        <img src={domain + el.image?.[0]?.url} alt={el.name} className="w-[151.2px] h-[181px] md:h-[172px] cursor-pointer lg:w-[207.2px] lg:h-[286px]" />
+                        <div className="flex flex-col items-center lg:items-start w-full h-[88px] gap-[2px] md:h-[84px] md:gap-[8px] lg:h-[52px]">
+                            <h1 className="text-[16px] ">{el.name}</h1>
+                            <div className="flex flex-col lg:flex-row justify-between items-center w-[151.2px] h-[51px] gap-[4px] md:gap-[16px] lg:w-[207.2px] lg:h-[19px] lg:gap-0">
+                                <div className="flex items-center gap-[4px]"> <Calicon className='w-[20px]' /> <h1 className="text-[12px] text-[#979797]">{el.release}</h1> </div>
+                                <div className="flex justify-center items-center gap-[4px]"><h1 className="text-[12px] cursor-pointer">Pre-Order</h1> <Trendarrow className='w-[15px]' /> </div>
                             </div>
-                        </div>
 
-                        <div className="flex flex-col items-center justify-center lg:justify-between lg:flex-row w-[151.2px] h-[25px] md:w-[85px] md:h-[52px] md:gap-[8px] lg:w-[207.2px] lg:h-[25px]">
-                            <div className="flex justify-center items-center md:w-[85px] md:h-[25px] gap-[8px]"> <del className="text-[#979797] text-[12px]"> {el.price + "$"}</del> <h1 className="text-[16px]"> {el.disprice + "$"} </h1> <h1 className="bg-[#FF5733] text-[10px] w-[25px] h-[14px] font-extralight text-center rounded-md"> {Math.round(((el.price - el.disprice) / el.price) * 100) + "$"} </h1>  </div>
-                            <div className="hidden md:flex justify-center items-center md:gap-[4px] md:w-[67px] md:h-[19px]"><h1 className="text-[12px] cursor-pointer">Buy Now</h1> <Trendarrow className='w-[15px]' /> </div>
                         </div>
-
                     </div>
                 ))
 

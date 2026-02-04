@@ -3,6 +3,7 @@ import GameOfTheMonth from "../components/GameOfTheMonth";
 import HeroSection from "../components/HeroSection";
 import Reviews from "../components/Reviews";
 import TrendingGames from "../components/TrendingGames";
+import UpcomingGames from "../components/UpcomingGames";
 export default function HomePage() {
 
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
     <TrendingGames/>
     <GameOfTheMonth/>
     <Reviews/>
+    <UpcomingGames/>
     </div>
   );
 }
