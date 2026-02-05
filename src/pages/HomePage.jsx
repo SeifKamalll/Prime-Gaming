@@ -1,5 +1,6 @@
 import GameCategories from "../components/GameCategories";
 import GameOfTheMonth from "../components/GameOfTheMonth";
+import GamesByFilter from "../components/GamesByFilter";
 import HeroSection from "../components/HeroSection";
 import Reviews from "../components/Reviews";
 import TrendingGames from "../components/TrendingGames";
@@ -14,6 +15,7 @@ export default function HomePage() {
     <GameOfTheMonth/>
     <Reviews/>
     <UpcomingGames/>
+    <GamesByFilter/>
     </div>
   );
 }

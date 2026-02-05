@@ -3,7 +3,6 @@ import Viewall from "../icons/viewall.svg?react"
 import { useEffect, useState } from "react";
 import { domain } from "../store";
 import Calicon from "../icons/calender icon.svg?react";
-import Micon from "../icons/M yellow Rate.svg?react";
 import Trendarrow from "../icons/trending arrow.svg?react";
 import axios from "axios";
 

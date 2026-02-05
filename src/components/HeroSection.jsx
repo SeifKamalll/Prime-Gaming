@@ -23,7 +23,6 @@ export default function HeroSection() {
 
     axios.get(url1, { params: { populate: '*', sort: ["order:asc"], filters: { Popular: { $eq: true } } } })
       .then((res) => {
-        console.log(res.data.data)
         setPopularGames(res.data.data)
         setActiveGame(res.data.data[0])
         setCurrentIndex(0);

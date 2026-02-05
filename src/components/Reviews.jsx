@@ -58,7 +58,7 @@ export default function Reviews() {
             <div className="flex overflow-x-auto w-full h-[590px] md:h-[820px] lg:h-[480px] gap-[16px] md:gap-[12px] md:flex-col lg:grid lg:grid-cols-2">
                 {/* Cards */}
                 {reviews?.map((el,i)=>(
-                    <div className="flex flex-col md:flex-row w-[310px] h-full gap-[10px] p-[8px] md:w-full md:h-[196px] lg:w-[588px] lg:h-[228px] border border-[#9763AD] rounded-xl">
+                    <div key={el.id} className="flex flex-col md:flex-row w-[310px] h-full gap-[10px] p-[8px] md:w-full md:h-[196px] lg:w-[588px] lg:h-[228px] border border-[#9763AD] rounded-xl">
                     <img src={domain + el.image?.[0]?.url} alt="" className="w-full h-[194px] md:w-[140px] md:h-[180px] lg:h-[212px] object-cover" />
                     <div className="flex flex-col w-[294px] h-[255px] gap-[16px] md:w-[540px] md:h-[180px] md:gap-[8px] lg:w-[306px] lg:h-[212px]">
                         <div className="flex flex-col">
