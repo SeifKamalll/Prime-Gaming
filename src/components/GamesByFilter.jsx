@@ -5,17 +5,26 @@ import axios from "axios";
 import Calicon from "../icons/calender icon.svg?react";
 import Micon from "../icons/M yellow Rate.svg?react";
 import Trendarrow from "../icons/trending arrow.svg?react";
-import Viewall from "../icons/viewall.svg?react"
+import Searchicon from "../icons/Searchicon2.svg?react"
+import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 export default function GamesByFilter() {
     const games = useGameStore((state) => state.games);
     const setGames = useGameStore((state) => state.setGames);
     const limit = useCardLimit();
+    const [categories, setCategories] = useState([])
+    const [activeGenres, setActiveGenres] = useState([]);
+    const [startIndex, setStartIndex] = useState(0);
 
     useEffect(() => {
         let url1 = domain + "/api/games";
         axios.get(url1, { params: { populate: '*' } })
             .then((res) => {
                 setGames(res.data.data)
+            })
+        let url2 = domain + "/api/genres"
+        axios.get(url2)
+            .then((res) => {
+                setCategories(res.data.data)
             })
     }, [])
 
@@ -33,6 +42,32 @@ export default function GamesByFilter() {
         return limit;
     }
 
+    const toggleGenre = (id) => {
+        setActiveGenres((prev) =>
+            prev.includes(id)
+                ? prev.filter((genreId) => genreId !== id) // remove
+                : [...prev, id] // add
+        );
+    };
+
+    const getVisibleCount = () => {
+        if (window.innerWidth < 768) return 3;      // mobile
+        if (window.innerWidth < 1024) return 7;     // tablet
+        return 9;                                  // desktop
+    };
+    const visibleCount = getVisibleCount();
+
+    const handleNext = () => {
+        setStartIndex((prev) =>
+            Math.min(prev + visibleCount, categories.length - visibleCount)
+        );
+    };
+
+    const handlePrev = () => {
+        setStartIndex((prev) => Math.max(prev - visibleCount, 0));
+    };
+
+
 
     return (
         <div className='flex flex-col items-center w-[382px] h-[1493px] gap-[24px] md:w-[884px] md:h-[1221px] md:gap-[32px] lg:w-[1200px] lg:h-[1301px]'>
@@ -43,7 +78,26 @@ export default function GamesByFilter() {
             </div>
             {/* Filters */}
             <div className='flex flex-col w-full h-[671px] gap-[24px] md:h-[350px] md:gap-[32px]'>
-
+                {/* Search */}
+                <div className="flex items-center w-full h-[48px] gap-[16px] pl-[12px] rounded-md bg-[#181724]">
+                    <Searchicon className="w-[32px] h-[32px]" />
+                    <input className="w-full outline-none text-[16px]" placeholder="Game Name" />
+                </div>
+                {/* Genres */}
+                <div className="flex items-center w-full h-[36px] gap-[12px] md:h-[44px] lg:gap-[16px]">
+                    <GoArrowLeft onClick={handlePrev} className="w-[36px] h-[36px] md:w-[44px] md:h-[44px] border rounded-md p-[8px] md:p-[12px] cursor-pointer hover:scale-105 transition-[opacity,scale]" />
+                    <div className="flex items-center h-full w-[286px] gap-[12px] md:w-[772px] lg:w-[1085px] lg:gap-[16px]">
+                        {categories?.slice(startIndex, startIndex + visibleCount).map((el, i) => {
+                            const isActive = activeGenres.includes(el.id);
+                            return (
+                                <button onClick={() => toggleGenre(el.id)} key={el.id} className={`w-[87.33px] h-[34px] py-[6px] md:w-[100px] md:h-[34px] lg:w-[105px] lg:h-[37px] rounded-2xl bg-[#181724] cursor-pointer hover:bg-[#FF5733] ${isActive ? "bg-[#FF5733]" : "bg-[#181724] hover:bg-[#FF5733]"}`}>
+                                    <h1 className="text-[14px]">{el.name}</h1>
+                                </button>
+                            )
+                        })}
+                    </div>
+                    <GoArrowRight onClick={handleNext} className="w-[36px] h-[36px] md:w-[44px] md:h-[44px] border rounded-md p-[8px] md:p-[12px] cursor-pointer hover:scale-105 transition-[opacity,scale]" />
+                </div>
             </div>
             {/* Games */}
             <div className='flex flex-col items-center w-full h-[682px] gap-[24px] md:h-[740px] md:gap-[20px] lg:h-[820px]'>
@@ -68,7 +122,7 @@ export default function GamesByFilter() {
                         </div>
                     ))}
                 </div>
-                
+
                 <button className="cursor-pointer justify-center items-center border border-[#FF5733] rounded-2xl w-[130px] h-[40px] md:w-[102px] md:h-[36px] lg:w-[130px] lg:h-[40px] hover:bg-gray-950"> <h1 className="text-[16px] md:text-[14px] lg:text-[16px] text-[#FF5733]">View All&nbsp;&nbsp;<span className="text-[20px]">{">"}</span></h1> </button>
             </div>
 

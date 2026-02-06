@@ -7,8 +7,11 @@ import Viewall from "../icons/viewall.svg?react"
 export default function GameCategories() {
   const [categories, setCategories] = useState([]);
   const [activeDot, setActiveDot] = useState(0)
+  const ITEMS_PER_PAGE = 6;
 
-  const dotsCount = 2;
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const dotsCount = Math.ceil(categories.length / ITEMS_PER_PAGE);
+
 
   useEffect(() => {
     axios
@@ -29,6 +32,27 @@ export default function GameCategories() {
       });
   }, []);
 
+  const startIndex = activeDot * ITEMS_PER_PAGE;
+  const visibleCategories = categories.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+
+  useEffect(() => {
+    const onResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      // 🔑 reset pagination when entering mobile
+      if (mobile) {
+        setActiveDot(0);
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <div className='flex flex-col justify-center items-center h-[254px] w-full gap-[24px] md:h-[449px] lg:h-[527px] lg:gap-[32px]'>
       <div className='flex w-[382px] items-center h-[36px] md:w-[884px] md:h-[51px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[51px] '>
@@ -37,16 +61,16 @@ export default function GameCategories() {
         <div className="md:hidden cursor-pointer w-[102px] px-[16px] py-[6px]"> <Viewall /> </div>
         <div className='hidden md:flex md:flex-col md:w-[72px] md:h-[51px] md:gap-[8px]'>
           <div className='flex md:gap-[8px] md:w-[72px] md:h-[31px]'>
-            <button onClick={() => { setActiveDot((prev) => (prev - 1 + dotsCount) % dotsCount) }} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+            <button onClick={() => setActiveDot((prev) => Math.max(prev - 1, 0))} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
               <GoArrowLeft size={20} />
             </button>
-            <button onClick={() => setActiveDot((prev) => (prev + 1) % dotsCount)} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+            <button onClick={() => setActiveDot((prev) => Math.min(prev + 1, dotsCount - 1))} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
               <GoArrowRight size={20} />
             </button>
           </div>
 
           <div className='flex justify-center items-center w-[72px] h-[12px] gap-[5px]'>
-            {[0, 1].map((index) => (
+            {Array.from({ length: dotsCount }).map((_, index) => (
               <div key={index} onClick={() => { setActiveDot(index) }} className={`${activeDot === index ? "bg-[#FF5733] h-[12px] w-[38px]" : "w-[20px] h-[8px] bg-[#452154]"} hover:w-[38px] hover:h-[12px] hover:bg-[#ff2f00] rounded-sm cursor-pointer`}></div>
             ))}
           </div>
@@ -55,7 +79,7 @@ export default function GameCategories() {
       </div>
 
       <div className='flex flex-nowrap overflow-x-auto md:overflow-visible md:grid md:grid-cols-4 md:grid-rows-2 w-[406px] md:w-full md:max-w-[884px] h-[210px] gap-[12px] md:h-[374px] md:gap-[20px] lg:max-w-[1200px] lg:h-[444px] lg:gap-x-[24px]'>
-        {categories.map((el, index) => {
+        {(isMobile ? categories : visibleCategories).map((el, index) => {
           const isBig = index === 0 || index === 5;
 
           return (
