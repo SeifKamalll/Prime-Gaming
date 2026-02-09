@@ -7,6 +7,8 @@ import Micon from "../icons/M yellow Rate.svg?react";
 import Trendarrow from "../icons/trending arrow.svg?react";
 import Searchicon from "../icons/Searchicon2.svg?react"
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import ReleaseYearSlider from "./ReleaseYearSlider";
+import RatingSlider from "./RatingSlider";
 export default function GamesByFilter() {
     const games = useGameStore((state) => state.games);
     const setGames = useGameStore((state) => state.setGames);
@@ -14,6 +16,7 @@ export default function GamesByFilter() {
     const [categories, setCategories] = useState([])
     const [activeGenres, setActiveGenres] = useState([]);
     const [startIndex, setStartIndex] = useState(0);
+    const [platforms, setPlatforms] = useState([]);
 
     useEffect(() => {
         let url1 = domain + "/api/games";
@@ -25,6 +28,12 @@ export default function GamesByFilter() {
         axios.get(url2)
             .then((res) => {
                 setCategories(res.data.data)
+            })
+
+        let url3 = domain + "/api/platforms"
+        axios.get(url3)
+            .then((res) => {
+                setPlatforms(res.data.data)
             })
     }, [])
 
@@ -90,7 +99,7 @@ export default function GamesByFilter() {
                         {categories?.slice(startIndex, startIndex + visibleCount).map((el, i) => {
                             const isActive = activeGenres.includes(el.id);
                             return (
-                                <button onClick={() => toggleGenre(el.id)} key={el.id} className={`w-[87.33px] h-[34px] py-[6px] md:w-[100px] md:h-[34px] lg:w-[105px] lg:h-[37px] rounded-2xl bg-[#181724] cursor-pointer hover:bg-[#FF5733] ${isActive ? "bg-[#FF5733]" : "bg-[#181724] hover:bg-[#FF5733]"}`}>
+                                <button onClick={() => toggleGenre(el.id)} key={el.id} className={`w-[87.33px] h-[34px] py-[6px] md:w-[100px] md:h-[34px] lg:w-[105px] lg:h-[37px] rounded-2xl bg-[#181724] cursor-pointer transition-all ${isActive ? "bg-[#FF5733]" : "bg-[#181724] hover:bg-[#FF5733]"}`}>
                                     <h1 className="text-[14px]">{el.name}</h1>
                                 </button>
                             )
@@ -98,6 +107,65 @@ export default function GamesByFilter() {
                     </div>
                     <GoArrowRight onClick={handleNext} className="w-[36px] h-[36px] md:w-[44px] md:h-[44px] border rounded-md p-[8px] md:p-[12px] cursor-pointer hover:scale-105 transition-[opacity,scale]" />
                 </div>
+                {/* Selectors Line */}
+                <div className="flex flex-col md:flex-row w-full h-[186px] gap-[36px] md:h-[38px]">
+                    <div className="flex w-full justify-between items-center h-[38px] gap-[19px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
+                        <h1 className="text-[16px]">Platform</h1>
+                        <select defaultValue="All" className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
+                            <option>All</option>
+                            {platforms?.map((el, i) => (
+                                <option key={el.id}>{el.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="flex w-full justify-between items-center h-[38px] gap-[12px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
+                        <h1 className="text-[16px]">Publisher</h1>
+                        <select defaultValue="All" className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
+                            <option>All</option>
+                            <option>Valve</option>
+                            <option>Rockstar Games</option>
+                            <option>EA</option>
+                            <option>Activision</option>
+                        </select>
+                    </div>
+                    <div className="flex w-full justify-between items-center h-[38px] gap-[19px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
+                        <h1 className="text-[16px]">Players</h1>
+                        <select defaultValue="All" className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
+                            <option>All</option>
+                            <option>+100</option>
+                            <option>+1k</option>
+                            <option>+10k</option>
+                        </select>
+                    </div>
+                </div>
+                {/* Sliders & Switches Line */}
+                <div className="flex flex-col md:flex-row md:items-center justify-center w-full h-[265px] gap-[24px] md:h-[52px] lg:gap-[36px]">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-center w-full h-[93px] gap-[16px] md:w-[278.67px] md:h-[52px] lg:w-[376px]">
+                        <h1 className="text-[16px] lg:w-[98.44px]">Release Year</h1>
+                        <ReleaseYearSlider />
+                    </div>
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-center w-full h-[93px] gap-[16px] md:w-[278.67px] md:h-[52px] lg:w-[376px]">
+                        <h1 className="text-[16px] lg:w-[98.44px]">Rating</h1>
+                        <RatingSlider />
+                    </div>
+                    {/* Switches */}
+                    <div className="flex w-full h-[31px] gap-[122px] items-center md:w-[278.67px] md:gap-[18.67px] lg:w-[376px] lg:gap-[118.44px]">
+                        <div className="flex w-[132px] h-[31px] items-center justify-between">
+                            <h1 className="text-[20px]">Online</h1>
+                            <input type="checkbox" className="toggle scale-x-[1.20] scale-y-[1.15] toggle-md border-[3px] border-[#FF5733] text-[#FF5733] checked:border-[#FF5733] checked:bg-[#FF5733] checked:text-[#1C1B29]" />
+                        </div>
+                        <div className="flex w-[121px] h-[31px] items-center justify-between">
+                            <h1 className="text-[20px]">Free</h1>
+                            <input type="checkbox" className="toggle scale-x-[1.20] scale-y-[1.15] toggle-md border-[3px] border-[#FF5733] text-[#FF5733] checked:border-[#FF5733] checked:bg-[#FF5733] checked:text-[#1C1B29]" />
+                        </div>
+                    </div>
+                </div>
+                {/* Search Bar */}
+                <button className="flex w-full h-[40px] justify-center items-center gap-[8px] bg-[#FF5733] rounded-2xl hover:bg-gray-950 cursor-pointer">
+                    <Searchicon className="w-[20px] h-[20px]" />
+                    <h1 className="text-[16px]">Search For Games</h1>
+                </button>
+
             </div>
             {/* Games */}
             <div className='flex flex-col items-center w-full h-[682px] gap-[24px] md:h-[740px] md:gap-[20px] lg:h-[820px]'>
