@@ -25,3 +25,14 @@
 
 
 /* @custom-variant dark (&:where(.dark, .dark *)); */
+
+
+/* This hides the scrollbar while keeping the scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}

@@ -78,7 +78,7 @@ export default function GameCategories() {
 
       </div>
 
-      <div className='flex flex-nowrap overflow-x-auto md:overflow-visible md:grid md:grid-cols-4 md:grid-rows-2 w-[406px] md:w-full md:max-w-[884px] h-[210px] gap-[12px] md:h-[374px] md:gap-[20px] lg:max-w-[1200px] lg:h-[444px] lg:gap-x-[24px]'>
+      <div className='flex flex-nowrap no-scrollbar overflow-x-auto md:overflow-visible md:grid md:grid-cols-4 md:grid-rows-2 w-[406px] md:w-full md:max-w-[884px] h-[210px] gap-[12px] md:h-[374px] md:gap-[20px] lg:max-w-[1200px] lg:h-[444px] lg:gap-x-[24px]'>
         {(isMobile ? categories : visibleCategories).map((el, index) => {
           const isBig = index === 0 || index === 5;
 

@@ -18,6 +18,7 @@ export default function GamesByFilter() {
     const [startIndex, setStartIndex] = useState(0);
     const [platforms, setPlatforms] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [isViewAll, setIsViewAll] = useState(false)
     const [appliedFilters, setAppliedFilters] = useState({
         genres: [],
         platform: "All",
@@ -36,7 +37,9 @@ export default function GamesByFilter() {
     const [isOnline, setIsOnline] = useState(false);
     const [isFree, setIsFree] = useState(false);
 
-
+    const pressViewAll = () => {
+        !isViewAll ? setIsViewAll(true) : setIsViewAll(false)
+    }
 
     useEffect(() => {
         let url1 = domain + "/api/games";
@@ -281,9 +284,9 @@ export default function GamesByFilter() {
 
             </div>
             {/* Games */}
-            <div className='flex flex-col items-center w-full h-[682px] gap-[24px] md:h-[740px] md:gap-[20px] lg:h-[820px]'>
-                <div className='grid grid-cols-2 md:grid-cols-5 w-full h-[618px] gap-x-[16px] gap-y-[24px] md:h-[684px] md:gap-x-[12px] md:gap-y-[20px] lg:h-[760px] lg:gap-x-[16px]'>
-                    {filteredGames?.slice(0, limit).map((el, i) => (
+            <div className='flex flex-col relative items-center w-full h-[682px] gap-[24px] md:h-[740px] md:gap-[20px] lg:h-[820px]'>
+                <div className={`grid grid-cols-2 md:grid-cols-5 ${isViewAll ? "no-scrollbar overflow-auto h-[658px] md:h-[720px] lg:h-[800px]" : "h-[618px] md:h-[684px] lg:h-[760px]"} w-full gap-x-[16px] gap-y-[24px] md:gap-x-[12px] md:gap-y-[20px] lg:gap-x-[16px]`}>
+                    {(!isViewAll ? filteredGames?.slice(0, limit) : filteredGames)?.map((el, i) => (
                         <div key={el.id} className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
                             <img src={domain + el.image?.[0]?.url} alt={el.name} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
                             <h1 className="w-[151.2px] h-[25px] text-[16px] lg:w-[207.2px] ">{el.name}</h1>
@@ -304,7 +307,8 @@ export default function GamesByFilter() {
                     ))}
                 </div>
 
-                <button className="cursor-pointer justify-center items-center border border-[#FF5733] rounded-2xl w-[130px] h-[40px] md:w-[102px] md:h-[36px] lg:w-[130px] lg:h-[40px] hover:bg-gray-950"> <h1 className="text-[16px] md:text-[14px] lg:text-[16px] text-[#FF5733]">View All&nbsp;&nbsp;<span className="text-[20px]">{">"}</span></h1> </button>
+                <button onClick={pressViewAll} className={`cursor-pointer ${isViewAll ? "hidden" : "flex"} justify-center items-center border border-[#FF5733] rounded-2xl w-[130px] h-[40px] md:w-[102px] md:h-[36px] lg:w-[130px] lg:h-[40px] hover:bg-gray-950`}> <h1 className="text-[16px] md:text-[14px] lg:text-[16px] text-[#FF5733]">View All&nbsp;&nbsp;<span className="text-[20px]">{">"}</span></h1> </button>
+                <button onClick={pressViewAll} className={`cursor-pointer ${isViewAll ? "flex" : "hidden"} absolute bottom-10 justify-center items-center border border-[#FF5733] rounded-xl w-[30px] h-[30px] md:w-[30px] md:h-[30px] lg:w-[30px] lg:h-[30px] bg-gray-950 text-[#FF5733] hover:text-white`}>{"<"}</button>
             </div>
 
         </div>

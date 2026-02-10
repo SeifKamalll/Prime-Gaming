@@ -1,3 +1,4 @@
+import BlogPost from "../components/BlogPost";
 import GameCategories from "../components/GameCategories";
 import GameOfTheMonth from "../components/GameOfTheMonth";
 import GamesByFilter from "../components/GamesByFilter";
@@ -16,6 +17,7 @@ export default function HomePage() {
     <Reviews/>
     <UpcomingGames/>
     <GamesByFilter/>
+    <BlogPost/>
     </div>
   );
 }

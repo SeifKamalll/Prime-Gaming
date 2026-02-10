@@ -53,7 +53,7 @@ export default function TrendingGames() {
 
 
             </div>
-            <div className="flex w-[406px] md:w-full h-[297px] overflow-x-auto gap-[16px] md:max-w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[370px]">
+            <div className="flex w-[406px] no-scrollbar md:w-full h-[297px] overflow-x-auto gap-[16px] md:max-w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[370px]">
                 {trending?.map((el, index) => (
                     <div key={el.id} className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
                         <img src={domain + el.image?.[0]?.url} alt={el.name} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
