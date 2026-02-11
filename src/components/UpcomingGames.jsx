@@ -16,7 +16,6 @@ export default function UpcomingGames() {
         let url1 = domain + "/api/games";
         axios.get(url1, { params: { populate: '*', filters: { upcoming: { $eq: true } } } })
             .then((res) => {
-                console.log(res.data.data)
                 setUpcoming(res.data.data)
             })
     }, [])

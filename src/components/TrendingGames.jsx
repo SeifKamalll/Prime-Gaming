@@ -17,7 +17,6 @@ export default function TrendingGames() {
         let url1 = domain + "/api/games";
         axios.get(url1, { params: { populate: '*', filters: { trending: { $eq: true } } } })
             .then((res) => {
-                console.log(res.data.data)
                 setTrending(res.data.data)
             })
     }, [])

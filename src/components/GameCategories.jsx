@@ -18,7 +18,6 @@ export default function GameCategories() {
       .get(domain + "/api/genres?populate=cover")
       .then((res) => {
         const data = res.data.data;
-        console.log(res.data.data)
         const sorted = data.sort((a, b) => {
           const orderA = a.order ?? 999;
           const orderB = b.order ?? 999;

@@ -1,10 +1,12 @@
 import BlogPost from "../components/BlogPost";
+import Faq from "../components/Faq";
 import GameCategories from "../components/GameCategories";
 import GameOfTheMonth from "../components/GameOfTheMonth";
 import GamesByFilter from "../components/GamesByFilter";
 import HeroSection from "../components/HeroSection";
 import Reviews from "../components/Reviews";
 import TrendingGames from "../components/TrendingGames";
+import UltimateGaming from "../components/UltimateGaming";
 import UpcomingGames from "../components/UpcomingGames";
 export default function HomePage() {
 
@@ -18,6 +20,8 @@ export default function HomePage() {
     <UpcomingGames/>
     <GamesByFilter/>
     <BlogPost/>
+    <UltimateGaming/>
+    <Faq/>
     </div>
   );
 }

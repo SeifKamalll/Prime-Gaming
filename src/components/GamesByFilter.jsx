@@ -46,7 +46,6 @@ export default function GamesByFilter() {
         axios.get(url1, { params: { populate: '*' } })
             .then((res) => {
                 setGames(res.data.data)
-                console.log(res.data)
             })
         let url2 = domain + "/api/genres"
         axios.get(url2)
