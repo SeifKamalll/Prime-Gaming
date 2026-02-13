@@ -22,17 +22,37 @@
   --font-Vazirmatn: "Vazirmatn", sans-serif;
 }
 
-
-
 /* @custom-variant dark (&:where(.dark, .dark *)); */
-
 
 /* This hides the scrollbar while keeping the scroll functionality */
 .no-scrollbar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Opera */
+  display: none; /* Chrome, Safari, and Opera */
 }
 
 .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.collapse-arrow > .collapse-title:after {
+  color: #6b2515 !important;
+  width: 14px; /* default is around 8px */
+  height: 14px; /* increase this to scale arrow */
+}
+
+.collapse-arrow[open] > .collapse-title:after {
+  color: #ff5733 !important;
+}
+
+details.collapse-arrow {
+  transition: border-color 0.3s ease;
+}
+
+/* When opened */
+details.collapse-arrow[open] {
+  border-color: #ff5733 !important; /* open color */
+}
+
+details.collapse-arrow[open] .collapse-content {
+  border-top-color: #ff5733 !important;
 }
