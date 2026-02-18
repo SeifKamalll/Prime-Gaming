@@ -2,7 +2,7 @@ import Geralt from "../images/geralt.jpg";
 import Micon from "../icons/M yellow Rate.svg?react";
 import Calicon from "../icons/calender icon.svg?react";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { domain } from "../store";
 import noimage from "../images/Image-not-found.png"
@@ -11,6 +11,22 @@ export default function HeroSection() {
   const [activeGame, setActiveGame] = useState(null);
   const [popularGames, setPopularGames] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const intervalRef = useRef(null);
+
+  const startAutoSlide = () => {
+  if (intervalRef.current) {
+    clearInterval(intervalRef.current);
+  }
+
+  intervalRef.current = setInterval(() => {
+    setCurrentIndex(prev => {
+      const next = prev === popularGames.length - 1 ? 0 : prev + 1;
+      setActiveGame(popularGames[next]);
+      return next;
+    });
+  }, 3000);
+};
 
 
   useEffect(() => {
@@ -47,17 +63,32 @@ export default function HeroSection() {
     }
     setCurrentIndex(nextIndex);
     setActiveGame(popularGames[nextIndex]);
+    startAutoSlide();
   };
 
   useEffect(() => {
-    if (popularGames.length === 0) return;
+  if (popularGames.length === 0) return;
 
-    const interval = setInterval(() => {
-      changeGame("next");
-    }, 3000); // 3 seconds
+  startAutoSlide();
 
-    return () => clearInterval(interval);
-  }, [popularGames.length, currentIndex]);
+  return () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  };
+}, [popularGames]);
+
+  const thumbsPerPage = 5;
+
+  const thumbPages = Math.ceil(popularGames.length / thumbsPerPage);
+
+  const currentThumbPage = Math.floor(currentIndex / thumbsPerPage);
+
+  const visibleThumbs = popularGames.slice(
+    currentThumbPage * thumbsPerPage,
+    currentThumbPage * thumbsPerPage + thumbsPerPage
+  );
+
 
 
   return (
@@ -106,26 +137,29 @@ export default function HeroSection() {
               </button>
             </div>
             <div className="flex items-end md:w-full md:h-[179px] md:gap-[8px] lg:w-[831px] lg:h-[240px] lg:gap-[16px]">
-              {popularGames.map((el, index) => (
-                <div key={el.documentId} className="hover-3d cursor-pointer" onClick={() => { setActiveGame(el); setCurrentIndex(index); }}>
-                  <figure className={`lg:w-[153.4px] md:h-[220px] rounded-2xl ${activeGame?.id === el.id ? "md:h-[240px]" : ""}`}>
-                    <img src={el.image ? domain + el.image?.[0].url : noimage} className="md:h-full" alt="Tailwind CSS 3D card" />
-                  </figure>
-                  {/* 8 empty divs needed for the 3D effect */}
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <span className={`absolute bottom-4 left-4 max-w-[100px] text-white transition-opacity ${currentIndex === index ? "opacity-100" : "opacity-0"}`}>
-                    {el.name}
-                  </span>
-                </div>
+              {visibleThumbs.map((el, index) => {
+                const realIndex = currentThumbPage * thumbsPerPage + index;
+                return (
+                  <div key={el.documentId} className="hover-3d cursor-pointer" onClick={() => { setActiveGame(el); setCurrentIndex(realIndex); startAutoSlide() }}>
+                    <figure className={`lg:w-[153.4px] md:h-[220px] rounded-2xl ${activeGame?.id === el.id ? "md:h-[240px]" : ""}`}>
+                      <img src={el.image ? domain + el.image?.[0].url : noimage} className="md:h-full" alt="Tailwind CSS 3D card" />
+                    </figure>
+                    {/* 8 empty divs needed for the 3D effect */}
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <span className={`absolute bottom-4 left-4 max-w-[100px] text-white transition-opacity ${currentIndex === realIndex ? "opacity-100" : "opacity-0"}`}>
+                      {el.name}
+                    </span>
+                  </div>
 
-              ))}
+                )
+              })}
 
 
             </div>
@@ -161,10 +195,12 @@ export default function HeroSection() {
           </div>
 
           <div className="flex w-[161px] h-[10px] gap-[4px]">
-            {popularGames?.map((el, i) => (
-              <div onClick={() => setActiveGame(el)} key={el.id} className={`bg-[#8C301C] hover:bg-[#FF5733] w-[25px] h-[6px] hover:w-[45px] hover:h-[10px] rounded-sm cursor-pointer ${activeGame?.id === el.id ? "bg-[#FF5733]" : ""}`}></div>
+            {popularGames?.map((el, index) => {
+              return (
+                <div onClick={() => { setActiveGame(popularGames[index]); setCurrentIndex(index); startAutoSlide(); }} key={el.id} className={`bg-[#8C301C] hover:bg-[#FF5733] w-[25px] h-[6px] hover:w-[45px] hover:h-[10px] rounded-sm cursor-pointer ${activeGame?.id === el.id ? "bg-[#FF5733]" : ""}`}></div>
 
-            ))}
+              )
+            })}
 
           </div>
 
