@@ -7,11 +7,17 @@ import Viewall from "../icons/viewall.svg?react"
 export default function GameCategories() {
   const [categories, setCategories] = useState([]);
   const [activeDot, setActiveDot] = useState(0)
-  const ITEMS_PER_PAGE = 6;
+
+  const itemsPerPage = 6;
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const dotsCount = Math.ceil(categories.length / ITEMS_PER_PAGE);
 
+  const pages = Math.ceil(categories.length / itemsPerPage);
+
+
+  const startIndex = activeDot * itemsPerPage;
+  const visibleCategories = categories.slice(startIndex, startIndex + itemsPerPage
+  );
 
   useEffect(() => {
     axios
@@ -31,11 +37,6 @@ export default function GameCategories() {
       });
   }, []);
 
-  const startIndex = activeDot * ITEMS_PER_PAGE;
-  const visibleCategories = categories.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
 
   useEffect(() => {
     const onResize = () => {
@@ -60,16 +61,16 @@ export default function GameCategories() {
         <div className="md:hidden cursor-pointer w-[102px] px-[16px] py-[6px]"> <Viewall /> </div>
         <div className='hidden md:flex md:flex-col md:w-[72px] md:h-[51px] md:gap-[8px]'>
           <div className='flex md:gap-[8px] md:w-[72px] md:h-[31px]'>
-            <button onClick={() => setActiveDot((prev) => Math.max(prev - 1, 0))} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+            <button onClick={() => setActiveDot((prev) => prev === 0 ? pages - 1 : prev - 1)} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
               <GoArrowLeft size={20} />
             </button>
-            <button onClick={() => setActiveDot((prev) => Math.min(prev + 1, dotsCount - 1))} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+            <button onClick={() => setActiveDot((prev) => prev === pages - 1 ? 0 : prev + 1)} className="cursor-pointer flex justify-center items-center w-[32px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
               <GoArrowRight size={20} />
             </button>
           </div>
 
           <div className='flex justify-center items-center w-[72px] h-[12px] gap-[5px]'>
-            {Array.from({ length: dotsCount }).map((_, index) => (
+            {Array.from({ length: pages }).map((_, index) => (
               <div key={index} onClick={() => { setActiveDot(index) }} className={`${activeDot === index ? "bg-[#FF5733] h-[12px] w-[38px]" : "w-[20px] h-[8px] bg-[#452154]"} hover:w-[38px] hover:h-[12px] hover:bg-[#ff2f00] rounded-sm cursor-pointer`}></div>
             ))}
           </div>
