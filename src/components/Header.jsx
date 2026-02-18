@@ -42,6 +42,7 @@ export default function Header() {
 
             {/* Mobile */}
             <div className="flex justify-end items-center w-[210px] h-[40px] gap-[12px] md:hidden">
+                <button onClick={() => { navigate("/login") }} className={`${token ? "hidden" : "btn flex md:hidden rounded-full w-[88px] h-[40px] px-[24px] py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white"}`}>Login</button>
                 <button onClick={Logout} className={`${token ? "btn flex md:hidden rounded-full w-[88px] h-[40px] px-[24px] py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white" : "hidden"}`}>Logout</button>
                 <div className="md:hidden cursor-pointer"> <Searchicon /> </div>
                 <div className="md:hidden cursor-pointer"> <Mobmenu /> </div>
