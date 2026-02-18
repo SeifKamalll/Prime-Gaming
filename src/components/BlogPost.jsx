@@ -7,10 +7,15 @@ import axios from 'axios';
 export default function BlogPost() {
     const [blogs, setBlogs] = useState([])
     const [activeDot, setActiveDot] = useState(0)
-    const ITEMS_PER_PAGE = 5;
-
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    const dotsCount = Math.ceil(blogs.length / ITEMS_PER_PAGE);
+    const itemsPerPage = 5;
+
+    const pages = Math.ceil(blogs.length / itemsPerPage);
+
+
+    const startIndex = activeDot * itemsPerPage;
+    const visibleBlogs = blogs.slice(startIndex, startIndex + itemsPerPage
+    );
 
     useEffect(() => {
         axios
@@ -30,11 +35,6 @@ export default function BlogPost() {
             });
     }, []);
 
-    const startIndex = activeDot * ITEMS_PER_PAGE;
-    const visibleBlogs = blogs.slice(
-        startIndex,
-        startIndex + ITEMS_PER_PAGE
-    );
 
     useEffect(() => {
         const onResize = () => {
@@ -65,16 +65,16 @@ export default function BlogPost() {
 
                 <div className='hidden md:flex md:flex-col md:w-[96px] md:h-[51px] md:gap-[8px]'>
                     <div className='flex md:gap-[8px] md:w-[96px] md:h-[31px]'>
-                        <button onClick={() => setActiveDot((prev) => Math.max(prev - 1, 0))} className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+                        <button onClick={() => setActiveDot((prev) => prev === 0 ? pages - 1 : prev - 1)} className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
                             <GoArrowLeft size={20} />
                         </button>
-                        <button onClick={() => setActiveDot((prev) => Math.min(prev + 1, dotsCount - 1))} className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
+                        <button onClick={() => setActiveDot((prev) => prev === pages - 1 ? 0 : prev + 1)} className="cursor-pointer flex justify-center items-center w-[44px] h-[32px] hover:scale-105 transition-[opacity,scale] border rounded-md text-[#ededed]">
                             <GoArrowRight size={20} />
                         </button>
                     </div>
 
                     <div className='flex items-center w-full h-[12px] gap-[11px]'>
-                        {Array.from({ length: dotsCount }).map((_, index) => (
+                        {Array.from({ length: pages }).map((_, index) => (
                             <div key={index} onClick={() => { setActiveDot(index) }} className={`${activeDot === index ? "bg-[#FF5733] h-[12px] w-[28px] hover:bg-[#ff2f00] rounded-md cursor-pointer" : "bg-[#452154] hover:bg-[#ff2f00] w-[7px] h-[7px] hover:w-[28px] hover:h-[12px] rounded-md cursor-pointer"}`}></div>
                         ))}
                     </div>
