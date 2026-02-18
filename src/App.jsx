@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainLayout from './MainLayout';
 import HomePage from './pages/HomePage';
+import Loginpage from './pages/loginpage';
+import Register from './pages/Register';
 
 export default function App() {
   return (
@@ -11,6 +13,8 @@ export default function App() {
             <Route index element={<HomePage />} />
           </Route>
           <Route path="*" element={<h1>Error 404 Not Found</h1>} />
+          <Route path="/login" element={<Loginpage/>} />
+          <Route path="/register" element={<Register/>} />
         </Routes>
       </BrowserRouter>
     </div>
