@@ -11,14 +11,14 @@ import trailer2 from "../Games/gameofthemonth/trailer2.png?react"
 import trailer3 from "../Games/gameofthemonth/trailer3.png?react"
 import trailer4 from "../Games/gameofthemonth/trailer4.png?react"
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 export default function GameOfTheMonth() {
-    const games = useGameStore((state) => state.games);
-    const setGames = useGameStore((state) => state.setGames);
+    const navigate = useNavigate()
+
     const game = useGameStore((state) => state.game);
     const setGame = useGameStore((state) => state.setGame);
     const [activeDot, setActiveDot] = useState(0)
-    const [activeTrailer, setActiveTrailer] = useState(0)
 
     const dotsCount = 4;
 
@@ -59,7 +59,7 @@ export default function GameOfTheMonth() {
 
                         </div>
                         <div className="buttons flex w-full h-[40px] gap-[12px] lg:h-[44px]">
-                            <button className="btn rounded-full bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white w-[185px] h-full md:w-[209px] lg:w-[285px] px-[24px] py-[8px] lg:px-[36px]">Buy Now</button>
+                            <button onClick={()=>{navigate(`/Games/${game.documentId}`)}} className="btn rounded-full bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white w-[185px] h-full md:w-[209px] lg:w-[285px] px-[24px] py-[8px] lg:px-[36px]">Buy Now</button>
                             <button className="btn rounded-full border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white w-[185px] h-full md:w-[209px] lg:w-[285px] px-[24px] py-[8px] lg:px-[36px]">Game review</button>
 
                         </div>
@@ -122,21 +122,21 @@ export default function GameOfTheMonth() {
                         <div className="flex flex-col w-full h-[55px] gap-[4px]">
                             <h1 className="tex-[12px] h-[19px]">RAM</h1>
                             <div className="w-full flex items-center gap-[4px] h-[32px] border rounded pl-[8px]">
-                                <RAM className="w-[24px] pb-[2px]"/>
+                                <RAM className="w-[24px] pb-[2px]" />
                                 <input className="w-full outline-none text-[12px]" placeholder="Enter Your RAM Storage" />
                             </div>
                         </div>
                         <div className="flex flex-col w-full h-[55px] gap-[4px]">
                             <h1 className="tex-[12px] h-[19px]">GPU</h1>
                             <div className="w-full flex items-center gap-[4px] h-[32px] border rounded pl-[8px]">
-                                <GPU className="w-[24px] pb-[2px]"/>
+                                <GPU className="w-[24px] pb-[2px]" />
                                 <input className="w-full outline-none text-[12px]" placeholder="Enter Your GPU State" />
                             </div>
                         </div>
                         <div className="flex flex-col w-full h-[55px] gap-[4px]">
                             <h1 className="tex-[12px] h-[19px]">CPU</h1>
                             <div className="w-full flex items-center gap-[4px] h-[32px] border rounded pl-[8px]">
-                                <CPU className="w-[24px] pb-[2px]"/>
+                                <CPU className="w-[24px] pb-[2px]" />
                                 <input className="w-full outline-none text-[12px]" placeholder="Enter Your CPU Details" />
                             </div>
                         </div>

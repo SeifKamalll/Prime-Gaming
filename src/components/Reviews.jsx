@@ -9,8 +9,11 @@ import Calicon from "../icons/calender icon.svg?react";
 import Viewsicon from "../icons/viewsicon.svg?react";
 import Comments from "../icons/commentsicon.svg?react";
 import Staricon from "../icons/staricon.svg?react";
+import { useNavigate } from "react-router-dom";
 
 export default function Reviews() {
+    const navigate = useNavigate()
+
     const [activeDot, setActiveDot] = useState(0)
     const [reviews, SetReviews] = useState([])
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -81,7 +84,7 @@ export default function Reviews() {
                 {/* Cards */}
                 {(isMobile ? reviews : visibleReviews)?.map((el, i) => (
                     <div key={el.id} className="flex flex-col md:flex-row w-[310px] h-full gap-[10px] p-[8px] md:w-full md:h-[196px] lg:w-[588px] lg:h-[228px] border border-[#9763AD] rounded-xl">
-                        <img src={domain + el.image?.[0]?.url} alt="" className="w-full h-[194px] md:w-[140px] md:h-[180px] lg:h-[212px] object-cover" />
+                        <img src={domain + el.image?.[0]?.url} alt={el.name} onClick={()=>{navigate(`/Games/${el.documentId}`)}} className="w-full h-[194px] md:w-[140px] md:h-[180px] lg:h-[212px] object-cover cursor-pointer" />
                         <div className="flex flex-col w-[294px] h-[255px] gap-[16px] md:w-[540px] md:h-[180px] md:gap-[8px] lg:w-[306px] lg:h-[212px]">
                             <div className="flex flex-col">
                                 <h1 className="text-[16px]">{el.name} <span className="text-[#979797]">({el.release})</span></h1>

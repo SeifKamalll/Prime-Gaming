@@ -3,6 +3,7 @@ import MainLayout from './MainLayout';
 import HomePage from './pages/HomePage';
 import Loginpage from './pages/loginpage';
 import Register from './pages/Register';
+import SingleGame from './pages/SingleGame';
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
         <Routes>
           <Route path='/' element={<MainLayout />}>
             <Route index element={<HomePage />} />
+          <Route path="/Games/:Gameid" element={<SingleGame/>} />
           </Route>
           <Route path="*" element={<h1>Error 404 Not Found</h1>} />
           <Route path="/login" element={<Loginpage/>} />

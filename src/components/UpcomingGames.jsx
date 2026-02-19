@@ -5,8 +5,11 @@ import { domain } from "../store";
 import Calicon from "../icons/calender icon.svg?react";
 import Trendarrow from "../icons/trending arrow.svg?react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function UpcomingGames() {
+    const navigate = useNavigate()
+
     const [upcoming, setUpcoming] = useState([])
     const [activeDot, setActiveDot] = useState(0)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -74,7 +77,7 @@ export default function UpcomingGames() {
             <div className="flex w-[406px] md:w-full h-[297px] overflow-x-auto no-scrollbar gap-[16px] md:max-w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[370px]">
                 {(isMobile ? upcoming : visibleUpComing)?.map((el, index) => (
                     <div key={el.id} className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
-                        <img src={domain + el.image?.[0]?.url} alt={el.name} className="w-[151.2px] h-[181px] md:h-[172px] cursor-pointer lg:w-[207.2px] lg:h-[286px]" />
+                        <img src={domain + el.image?.[0]?.url} alt={el.name} onClick={()=>{navigate(`/Games/${el.documentId}`)}} className="w-[151.2px] h-[181px] md:h-[172px] cursor-pointer lg:w-[207.2px] lg:h-[286px]" />
                         <div className="flex flex-col items-center lg:items-start w-full h-[88px] gap-[2px] md:h-[84px] md:gap-[8px] lg:h-[52px]">
                             <h1 className="text-[16px] ">{el.name}</h1>
                             <div className="flex flex-col lg:flex-row justify-between items-center w-[151.2px] h-[51px] gap-[4px] md:gap-[16px] lg:w-[207.2px] lg:h-[19px] lg:gap-0">

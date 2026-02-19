@@ -6,7 +6,11 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { domain } from "../store";
 import noimage from "../images/Image-not-found.png"
+import { useNavigate } from "react-router-dom";
+
 export default function HeroSection() {
+  const navigate = useNavigate()
+
   const [games, setGames] = useState([])
   const [activeGame, setActiveGame] = useState(null);
   const [popularGames, setPopularGames] = useState([]);
@@ -15,18 +19,18 @@ export default function HeroSection() {
   const intervalRef = useRef(null);
 
   const startAutoSlide = () => {
-  if (intervalRef.current) {
-    clearInterval(intervalRef.current);
-  }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
 
-  intervalRef.current = setInterval(() => {
-    setCurrentIndex(prev => {
-      const next = prev === popularGames.length - 1 ? 0 : prev + 1;
-      setActiveGame(popularGames[next]);
-      return next;
-    });
-  }, 3000);
-};
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex(prev => {
+        const next = prev === popularGames.length - 1 ? 0 : prev + 1;
+        setActiveGame(popularGames[next]);
+        return next;
+      });
+    }, 3000);
+  };
 
 
   useEffect(() => {
@@ -67,16 +71,16 @@ export default function HeroSection() {
   };
 
   useEffect(() => {
-  if (popularGames.length === 0) return;
+    if (popularGames.length === 0) return;
 
-  startAutoSlide();
+    startAutoSlide();
 
-  return () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-  };
-}, [popularGames]);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [popularGames]);
 
   const thumbsPerPage = 5;
 
@@ -119,7 +123,7 @@ export default function HeroSection() {
               ))}
             </div>
             <div className="flex md:w-full md:h-[40px] lg:h-[44px] md:gap-[12px]">
-              <button className="btn rounded-full md:w-[144px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white">Buy Now</button>
+              <button onClick={() => { navigate(`/Games/${activeGame.documentId}`) }} className="btn rounded-full md:w-[144px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white">Buy Now</button>
               <button className="btn rounded-full border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white md:w-[177px]">Game review</button>
             </div>
           </div>

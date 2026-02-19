@@ -6,8 +6,10 @@ import Calicon from "../icons/calender icon.svg?react";
 import Micon from "../icons/M yellow Rate.svg?react";
 import Trendarrow from "../icons/trending arrow.svg?react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function TrendingGames() {
+    const navigate = useNavigate()
     const [trending, setTrending] = useState([])
     const [activeDot, setActiveDot] = useState(0)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -77,8 +79,8 @@ export default function TrendingGames() {
             </div>
             <div className="flex w-[406px] no-scrollbar overflow-x-auto overflow-y-hidden md:w-full h-[297px] gap-[16px] md:max-w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[370px]">
                 {(isMobile ? trending : visibleGames)?.map((el, index) => (
-                    <div key={el.id} className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
-                        <img src={domain + el.image?.[0]?.url} alt={el.name} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
+                    <div key={el.id}  className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
+                        <img src={domain + el.image?.[0]?.url} alt={el.name} onClick={()=>{navigate(`/Games/${el.documentId}`)}} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
                         <h1 className="w-[151.2px] h-[25px] text-[16px] lg:w-[207.2px] ">{el.name}</h1>
                         <div className="flex justify-between items-center w-[151.2px] h-[25px] lg:w-[207.2px]">
                             <div className="flex w-[75.6px] items-center h-[20px] gap-[4px] lg:w-[97.6px]"> <Calicon className='w-[20px]' /> <h1 className="text-[12px] text-[#979797]">{el.release}</h1> </div>
