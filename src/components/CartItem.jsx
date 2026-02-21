@@ -6,7 +6,7 @@ export default function CartItem({ game }) {
 
     return (
         <div className="flex w-full gap-4 items-center bg-gray-950/40 rounded-lg p-1">
-            <div className="flex justify-center items-center h-30 w-30 border-[#FF5733] border rounded-xl overflow-hidden">
+            <div className="flex justify-center items-center h-20 md:h-30 md:w-30 border-[#FF5733] border rounded-xl overflow-hidden">
                 <img className="w-full h-full object-cover" src={game.cover ? domain + game.cover?.url : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'} alt="" />
             </div>
             <div className="flex w-full h-[88px] justify-between">

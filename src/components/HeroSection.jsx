@@ -194,7 +194,7 @@ export default function HeroSection() {
           </div>
 
           <div className="w-full h-[44px] flex justify-center items-center gap-[12px]">
-            <button className="btn rounded-full w-[185px] h-[44px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white">Buy Now</button>
+            <button onClick={() => { navigate(`/Games/${activeGame.documentId}`) }} className="btn rounded-full w-[185px] h-[44px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white">Buy Now</button>
             <button className="btn rounded-full border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white w-[185px] h-[44px]">Game review</button>
           </div>
 
