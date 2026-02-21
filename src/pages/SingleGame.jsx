@@ -144,8 +144,8 @@ const navigate = useNavigate();
               </div>
 
               <div className="flex flex-col gap-4">
-                <button onClick={() =>{ addToCart(game); navigate("/cart");}} className="transition py-4 rounded-2xl font-bold cursor-pointer bg-[#FF5733] hover:bg-gray-950 border border-[#FF5733] text-white">
-                  Buy Now
+                <button onClick={() =>{ addToCart(game);}} className="transition py-4 rounded-2xl font-bold cursor-pointer bg-[#FF5733] hover:bg-gray-950 border border-[#FF5733] text-white">
+                  Add To Cart
                 </button>
 
                 <button className="border border-[#FF5733] text-[#FF5733] hover:bg-gray-950 hover:text-white transition py-4 rounded-2xl font-bold cursor-pointer">

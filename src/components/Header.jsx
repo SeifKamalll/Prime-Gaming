@@ -5,8 +5,10 @@ import Arrowdown from "../icons/arrowdownheader.svg?react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoCartOutline } from 'react-icons/io5';
+import { useCart } from "../store";
 
 export default function Header() {
+    const { items } = useCart();
     const navigate = useNavigate();
     const [token, setToken] = useState(null);
 
@@ -19,7 +21,8 @@ export default function Header() {
     const Logout = () => {
         localStorage.removeItem("token")
         sessionStorage.removeItem("token")
-        navigate(0);
+        navigate("/");
+        setToken(null)
     }
 
     return (
@@ -39,6 +42,12 @@ export default function Header() {
                 <button onClick={() => { navigate("/register") }} className={`${token ? "hidden" : "btn hidden md:flex rounded-full md:w-[104px] md:h-[40px] md:px-[24px] md:py-[8px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white"}`}>Sign Up</button>
                 <button onClick={() => { navigate("/login") }} className={`${token ? "hidden" : "btn hidden md:flex rounded-full md:w-[88px] md:h-[40px] md:px-[24px] md:py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white"}`}>Login</button>
                 <button onClick={Logout} className={`${token ? "btn hidden md:flex rounded-full md:w-[88px] md:h-[40px] md:px-[24px] md:py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white" : "hidden"}`}>Logout</button>
+                <button className="hover:opacity-75 transition-opacity cursor-pointer relative" onClick={() => { navigate('/Cart'); }}>
+                    <IoCartOutline className='h-8 w-8' />
+                    <div>
+                        {items.length != 0 && <span className='absolute top-7 right-2 text-[#FF5733] font-bold text-xl'>{items.length}</span>}
+                    </div>
+                </button>
 
             </div>
 

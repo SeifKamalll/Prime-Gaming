@@ -36,7 +36,7 @@ export const useCart = create((set) => ({
             } else {
                 // The Product in cart Qty++
                 games[final].qty++;
-                toast.success('Product Qty Changed To : ' + games[final].qty);
+                toast.success('Qty : ' + games[final].qty);
             }
             state.calcTotal();
 
@@ -48,7 +48,6 @@ export const useCart = create((set) => ({
             let games = state.items;
             let index = games.findIndex((el) => el.documentId == documentId);
             games[index].qty++;
-            toast.success('Product Qty Changed To : ' + games[index].qty);
             state.calcTotal();
             return { items: games };
         }),
@@ -59,10 +58,9 @@ export const useCart = create((set) => ({
             let index = games.findIndex((el) => el.documentId == documentId);
             if (games[index].qty > 1) {
                 games[index].qty--;
-                toast.success('Product Qty Changed To : ' + games[index].qty);
             } else {
                 games.splice(index, 1);
-                toast.success('Product removed from cart');
+                toast.success('Game Removed from cart');
             }
             state.calcTotal();
             return { items: games };
@@ -73,7 +71,7 @@ export const useCart = create((set) => ({
             let games = state.items;
             let index = games.findIndex((el) => el.documentId == documentId);
             games.splice(index, 1);
-            toast.success('Product removed from cart');
+            toast.success('Game removed from cart');
             state.calcTotal();
             return { items: games };
         }),
