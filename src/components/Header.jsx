@@ -4,6 +4,8 @@ import Mobmenu from "../icons/mobile_menu.svg?react";
 import Arrowdown from "../icons/arrowdownheader.svg?react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { IoCartOutline } from 'react-icons/io5';
+
 export default function Header() {
     const navigate = useNavigate();
     const [token, setToken] = useState(null);
@@ -23,7 +25,7 @@ export default function Header() {
     return (
 
         <header className='fixed container top-0 z-50 justify-between flex items-center backdrop-blur-xs w-[430px] h-[64px] px-[24px] py-[12px] md:w-[1080px] md:h-[83px] md:py-[10px] md:gap-[20px] lg:w-[1440px] lg:h-[90px] lg:py-[12px]'>
-            <div onClick={()=>{navigate(`/`)}} className="cursor-pointer"> <Logo /> </div>
+            <div onClick={() => { navigate(`/`) }} className="cursor-pointer"> <Logo /> </div>
             <div className="hidden md:block"> <Searchicon /> </div>
             <div className='hidden items-center justify-between md:flex lg:w-[811px] lg:h-[23px] font-Vazirmatn'>
                 <h1>Home</h1>
