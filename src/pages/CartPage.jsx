@@ -17,9 +17,9 @@ export default function CartPage() {
 
     const CheckOut = () => {
         if (total <= 0) {
-            toast.error("Please Add Games First")
+            toast.error("Please Add Games First",{style: {borderRadius: '10px',background: '#333',color: '#fff',},})
         } else {
-            token ? toast.success("Checkout Successful") : toast.error("Please Login First")
+            token ? toast.success('Checkout Successful',{style: {borderRadius: '10px',background: '#333',color: '#fff',},}) : toast.error("Please Login First",{style: {borderRadius: '10px',background: '#333',color: '#fff',}})
         }
     }
 

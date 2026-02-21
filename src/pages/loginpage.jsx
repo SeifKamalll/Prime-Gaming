@@ -20,10 +20,10 @@ export default function Loginpage() {
     axios.post(url, dataToSend).then((res) => {
       let token = res.data.jwt;
       values.isChecked ? localStorage.setItem("token", token) : sessionStorage.setItem("token", token);
-      toast.success('Logged in Successfully');
+      toast.success('Logged in Successfully',{style: {borderRadius: '10px',background: '#333',color: '#fff',},});
       navigate("/");
     }).catch((err) => {
-      toast.error(err.response.data.error.message);
+      toast.error(err.response.data.error.message,{style: {borderRadius: '10px',background: '#333',color: '#fff',},});
     })
   }
 

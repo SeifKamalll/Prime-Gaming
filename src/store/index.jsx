@@ -32,11 +32,11 @@ export const useCart = create((set) => ({
             if (final == -1) {
                 // The Product not into Cart
                 games.push({ ...newProduct, qty: 1 });
-                toast.success('Added to cart');
+                toast.success('Added to cart',{style: {borderRadius: '10px',background: '#333',color: '#fff',},});
             } else {
                 // The Product in cart Qty++
                 games[final].qty++;
-                toast.success('Qty : ' + games[final].qty);
+                toast.success('Qty : ' + games[final].qty,{style: {borderRadius: '10px',background: '#333',color: '#fff',},});
             }
             state.calcTotal();
 
@@ -60,7 +60,7 @@ export const useCart = create((set) => ({
                 games[index].qty--;
             } else {
                 games.splice(index, 1);
-                toast.success('Game Removed from cart');
+                toast.success('Game Removed from cart',{style: {borderRadius: '10px',background: '#333',color: '#fff',},});
             }
             state.calcTotal();
             return { items: games };
@@ -71,7 +71,7 @@ export const useCart = create((set) => ({
             let games = state.items;
             let index = games.findIndex((el) => el.documentId == documentId);
             games.splice(index, 1);
-            toast.success('Game removed from cart');
+            toast.success('Game removed from cart',{style: {borderRadius: '10px',background: '#333',color: '#fff',},});
             state.calcTotal();
             return { items: games };
         }),

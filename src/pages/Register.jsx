@@ -30,10 +30,10 @@ export default function Register() {
         axios.post(url, values).then((res) => {
             let token = res.data.jwt
             sessionStorage.setItem('token', token);
-            toast.success('Registerd Successfully');
+            toast.success('Registerd Successfully',{style: {borderRadius: '10px',background: '#333',color: '#fff',},});
             navigate('/')
         }).catch((err) => {
-            toast.error(err.response.data.error.message);
+            toast.error(err.response.data.error.message,{style: {borderRadius: '10px',background: '#333',color: '#fff',},});
         })
     }
 
