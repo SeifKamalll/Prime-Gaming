@@ -39,6 +39,20 @@ export default function GamesByFilter() {
     const [selectedRating, setSelectedRating] = useState([0, 100]);
     const [isOnline, setIsOnline] = useState(false);
     const [isFree, setIsFree] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    useEffect(() => {
+        const onResize = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+        };
+
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+    }, []);
+
+    let togglemobile = ()=>{
+        isMobile ? setIsMobile(window.innerWidth > 768) : setIsMobile(window.innerWidth < 768)
+    }
 
     const pressViewAll = () => {
         !isViewAll ? setIsViewAll(true) : setIsViewAll(false)
@@ -194,95 +208,100 @@ export default function GamesByFilter() {
                 <h1 className='text-[16px] text-[#979797] text-center'>At This Section You Can Search For Games by multiple filters</h1>
             </div>
             {/* Filters */}
-            <div className='flex flex-col w-full h-[671px] gap-[24px] md:h-[350px] md:gap-[32px]'>
+            <div className={isMobile ? `flex flex-col items-center w-full h-[68px] gap-[16px] pl-[12px]` : `flex flex-col items-center w-full h-[701px] gap-[24px] md:h-[350px] md:gap-[32px]`}>
                 {/* Search */}
                 <div className="flex items-center w-full h-[48px] gap-[16px] pl-[12px] rounded-md bg-[#181724]">
                     <Searchicon className="w-[32px] h-[32px]" />
                     <input className="w-full outline-none text-[16px]" placeholder="Game Name" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 </div>
-                {/* Genres */}
-                <div className="flex items-center w-full h-[36px] gap-[12px] md:h-[44px] lg:gap-[16px]">
-                    <GoArrowLeft onClick={handlePrev} className="w-[36px] h-[36px] md:w-[44px] md:h-[44px] border rounded-md p-[8px] md:p-[12px] cursor-pointer hover:scale-105 transition-[opacity,scale]" />
-                    <div className="flex items-center h-full w-[286px] gap-[12px] md:w-[772px] lg:w-[1085px] lg:gap-[16px]">
-                        {categories?.slice(startIndex, startIndex + visibleCount).map((el, i) => {
-                            const isActive = selectedGenres.includes(el.id);
-                            return (
-                                <button onClick={() => toggleGenre(el.id)} key={el.id} className={`w-[87.33px] h-[34px] py-[6px] md:w-[100px] md:h-[34px] lg:w-[105px] lg:h-[37px] rounded-2xl bg-[#181724] cursor-pointer transition-all ${isActive ? "bg-[#FF5733]" : "bg-[#181724] hover:bg-[#FF5733]"}`}>
-                                    <h1 className="text-[14px]">{el.name}</h1>
-                                </button>
-                            )
-                        })}
-                    </div>
-                    <GoArrowRight onClick={handleNext} className="w-[36px] h-[36px] md:w-[44px] md:h-[44px] border rounded-md p-[8px] md:p-[12px] cursor-pointer hover:scale-105 transition-[opacity,scale]" />
-                </div>
-                {/* Selectors Line */}
-                <div className="flex flex-col md:flex-row w-full h-[186px] gap-[36px] md:h-[38px]">
-                    <div className="flex w-full justify-between items-center h-[38px] gap-[19px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
-                        <h1 className="text-[16px]">Platform</h1>
-                        <select value={selectedPlatform} onChange={(e) => setSelectedPlatform(e.target.value)} className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
-                            <option>All</option>
-                            {platforms?.map((el, i) => (
-                                <option key={el.id}>{el.name}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="flex w-full justify-between items-center h-[38px] gap-[12px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
-                        <h1 className="text-[16px]">Publisher</h1>
-                        <select value={selectedPublisher} onChange={(e) => setSelectedPublisher(e.target.value)} className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
-                            <option>All</option>
-                            <option>Valve</option>
-                            <option>Rockstar Games</option>
-                            <option>EA</option>
-                            <option>Activision</option>
-                        </select>
-                    </div>
-                    <div className="flex w-full justify-between items-center h-[38px] gap-[19px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
-                        <h1 className="text-[16px]">Players</h1>
-                        <select value={selectedPlayers} onChange={(e) => setSelectedPlayers(e.target.value)} className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
-                            <option>All</option>
-                            <option>+100</option>
-                            <option>+1k</option>
-                            <option>+10k</option>
-                        </select>
-                    </div>
-                </div>
-                {/* Sliders & Switches Line */}
-                <div className="flex flex-col md:flex-row md:items-center justify-center w-full h-[265px] gap-[24px] md:h-[52px] lg:gap-[36px]">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-center w-full h-[93px] gap-[16px] md:w-[278.67px] md:h-[52px] lg:w-[376px]">
-                        <h1 className="text-[16px] lg:w-[98.44px]">Release Year</h1>
-                        <ReleaseYearSlider value={selectedReleaseYear} onChange={setSelectedReleaseYear} />
-                    </div>
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-center w-full h-[93px] gap-[16px] md:w-[278.67px] md:h-[52px] lg:w-[376px]">
-                        <h1 className="text-[16px] lg:w-[98.44px]">Rating</h1>
-                        <RatingSlider value={selectedRating} onChange={setSelectedRating} />
-                    </div>
-                    {/* Switches */}
-                    <div className="flex w-full h-[31px] gap-[122px] items-center md:w-[278.67px] md:gap-[18.67px] lg:w-[376px] lg:gap-[118.44px]">
-                        <div className="flex w-[132px] h-[31px] items-center justify-between">
-                            <h1 className="text-[20px]">Online</h1>
-                            <input checked={isOnline} onChange={(e) => setIsOnline(e.target.checked)} type="checkbox" className="toggle scale-x-[1.20] scale-y-[1.15] toggle-md border-[3px] border-[#FF5733] text-[#FF5733] checked:border-[#FF5733] checked:bg-[#FF5733] checked:text-[#1C1B29]" />
+                {/* Mobile Filters Toggle */}
+                <button onClick={togglemobile} className={`btn md:hidden rounded-xl w-[100px] h-[30px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white`}>Filters</button>
+                <div className={isMobile ? `mobiletogglee hidden md:flex flex-col w-full h-[623px] gap-[22px] md:h-[302px] md:gap-[30px]` : `mobiletogglee flex flex-col w-full h-[623px] gap-[22px] md:h-[302px] md:gap-[30px]`}>
+                    {/* Genres */}
+                    <div className="flex items-center w-full h-[36px] gap-[12px] md:h-[44px] lg:gap-[16px]">
+                        <GoArrowLeft onClick={handlePrev} className="w-[36px] h-[36px] md:w-[44px] md:h-[44px] border rounded-md p-[8px] md:p-[12px] cursor-pointer hover:scale-105 transition-[opacity,scale]" />
+                        <div className="flex items-center h-full w-[286px] gap-[12px] md:w-[772px] lg:w-[1085px] lg:gap-[16px]">
+                            {categories?.slice(startIndex, startIndex + visibleCount).map((el, i) => {
+                                const isActive = selectedGenres.includes(el.id);
+                                return (
+                                    <button onClick={() => toggleGenre(el.id)} key={el.id} className={`w-[87.33px] h-[34px] py-[6px] md:w-[100px] md:h-[34px] lg:w-[105px] lg:h-[37px] rounded-2xl bg-[#181724] cursor-pointer transition-all ${isActive ? "bg-[#FF5733]" : "bg-[#181724] hover:bg-[#FF5733]"}`}>
+                                        <h1 className="text-[14px]">{el.name}</h1>
+                                    </button>
+                                )
+                            })}
                         </div>
-                        <div className="flex w-[121px] h-[31px] items-center justify-between">
-                            <h1 className="text-[20px]">Free</h1>
-                            <input checked={isFree} onChange={(e) => setIsFree(e.target.checked)} type="checkbox" className="toggle scale-x-[1.20] scale-y-[1.15] toggle-md border-[3px] border-[#FF5733] text-[#FF5733] checked:border-[#FF5733] checked:bg-[#FF5733] checked:text-[#1C1B29]" />
+                        <GoArrowRight onClick={handleNext} className="w-[36px] h-[36px] md:w-[44px] md:h-[44px] border rounded-md p-[8px] md:p-[12px] cursor-pointer hover:scale-105 transition-[opacity,scale]" />
+                    </div>
+                    {/* Selectors Line */}
+                    <div className="flex flex-col md:flex-row w-full h-[186px] gap-[36px] md:h-[38px]">
+                        <div className="flex w-full justify-between items-center h-[38px] gap-[19px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
+                            <h1 className="text-[16px]">Platform</h1>
+                            <select value={selectedPlatform} onChange={(e) => setSelectedPlatform(e.target.value)} className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
+                                <option>All</option>
+                                {platforms?.map((el, i) => (
+                                    <option key={el.id}>{el.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="flex w-full justify-between items-center h-[38px] gap-[12px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
+                            <h1 className="text-[16px]">Publisher</h1>
+                            <select value={selectedPublisher} onChange={(e) => setSelectedPublisher(e.target.value)} className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
+                                <option>All</option>
+                                <option>Valve</option>
+                                <option>Rockstar Games</option>
+                                <option>EA</option>
+                                <option>Activision</option>
+                            </select>
+                        </div>
+                        <div className="flex w-full justify-between items-center h-[38px] gap-[19px] md:w-[270.67px] md:gap-[12px] lg:w-[376px] lg:gap-[16px]">
+                            <h1 className="text-[16px]">Players</h1>
+                            <select value={selectedPlayers} onChange={(e) => setSelectedPlayers(e.target.value)} className="select select-ghost w-[300px] h-full md:w-[190.67px] lg:w-[280px] cursor-pointer outline-0 bg-[#181724] rounded-md">
+                                <option>All</option>
+                                <option>+100</option>
+                                <option>+1k</option>
+                                <option>+10k</option>
+                            </select>
                         </div>
                     </div>
+                    {/* Sliders & Switches Line */}
+                    <div className="flex flex-col md:flex-row md:items-center justify-center w-full h-[265px] gap-[24px] md:h-[52px] lg:gap-[36px]">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-center w-full h-[93px] gap-[16px] md:w-[278.67px] md:h-[52px] lg:w-[376px]">
+                            <h1 className="text-[16px] lg:w-[98.44px]">Release Year</h1>
+                            <ReleaseYearSlider value={selectedReleaseYear} onChange={setSelectedReleaseYear} />
+                        </div>
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-center w-full h-[93px] gap-[16px] md:w-[278.67px] md:h-[52px] lg:w-[376px]">
+                            <h1 className="text-[16px] lg:w-[98.44px]">Rating</h1>
+                            <RatingSlider value={selectedRating} onChange={setSelectedRating} />
+                        </div>
+                        {/* Switches */}
+                        <div className="flex w-full h-[31px] gap-[122px] items-center md:w-[278.67px] md:gap-[18.67px] lg:w-[376px] lg:gap-[118.44px]">
+                            <div className="flex w-[132px] h-[31px] items-center justify-between">
+                                <h1 className="text-[20px]">Online</h1>
+                                <input checked={isOnline} onChange={(e) => setIsOnline(e.target.checked)} type="checkbox" className="toggle scale-x-[1.20] scale-y-[1.15] toggle-md border-[3px] border-[#FF5733] text-[#FF5733] checked:border-[#FF5733] checked:bg-[#FF5733] checked:text-[#1C1B29]" />
+                            </div>
+                            <div className="flex w-[121px] h-[31px] items-center justify-between">
+                                <h1 className="text-[20px]">Free</h1>
+                                <input checked={isFree} onChange={(e) => setIsFree(e.target.checked)} type="checkbox" className="toggle scale-x-[1.20] scale-y-[1.15] toggle-md border-[3px] border-[#FF5733] text-[#FF5733] checked:border-[#FF5733] checked:bg-[#FF5733] checked:text-[#1C1B29]" />
+                            </div>
+                        </div>
+                    </div>
+                    {/* Search Button */}
+                    <button onClick={() => setAppliedFilters({
+                        genres: selectedGenres,
+                        platform: selectedPlatform,
+                        publisher: selectedPublisher,
+                        players: selectedPlayers,
+                        releaseYear: selectedReleaseYear,
+                        rating: selectedRating,
+                        online: isOnline,
+                        free: isFree,
+                    })
+                    } className="flex w-full h-[40px] justify-center items-center gap-[8px] bg-[#FF5733] rounded-2xl hover:bg-gray-950 cursor-pointer">
+                        <Searchicon className="w-[20px] h-[20px]" />
+                        <h1 className="text-[16px]">Search For Games</h1>
+                    </button>
+
                 </div>
-                {/* Search Button */}
-                <button onClick={() => setAppliedFilters({
-                    genres: selectedGenres,
-                    platform: selectedPlatform,
-                    publisher: selectedPublisher,
-                    players: selectedPlayers,
-                    releaseYear: selectedReleaseYear,
-                    rating: selectedRating,
-                    online: isOnline,
-                    free: isFree,
-                })
-                } className="flex w-full h-[40px] justify-center items-center gap-[8px] bg-[#FF5733] rounded-2xl hover:bg-gray-950 cursor-pointer">
-                    <Searchicon className="w-[20px] h-[20px]" />
-                    <h1 className="text-[16px]">Search For Games</h1>
-                </button>
 
             </div>
             {/* Games */}
@@ -290,8 +309,8 @@ export default function GamesByFilter() {
                 <div className={`grid grid-cols-2 md:grid-cols-5 ${isViewAll ? "no-scrollbar overflow-auto h-[658px] md:h-[720px] lg:h-[800px]" : "h-[618px] md:h-[684px] lg:h-[760px]"} w-full gap-x-[16px] gap-y-[24px] md:gap-x-[12px] md:gap-y-[20px] lg:gap-x-[16px]`}>
                     {(!isViewAll ? filteredGames?.slice(0, limit) : filteredGames)?.map((el, i) => (
                         <div key={el.id} className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
-                            <img src={domain + el.image?.[0]?.url} alt={el.name} onClick={()=>{navigate(`/Games/${el.documentId}`)}} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
-                            <h1 className="w-[151.2px] h-[25px] text-[16px] lg:w-[207.2px] ">{el.name}</h1>
+                            <img src={domain + el.image?.[0]?.url} alt={el.name} onClick={() => { navigate(`/Games/${el.documentId}`) }} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
+                            <h1 className="w-[151.2px] h-[25px] text-[13px] md:text-[16px] lg:w-[207.2px] ">{el.name}</h1>
                             <div className="flex justify-between items-center w-[151.2px] h-[25px] lg:w-[207.2px]">
                                 <div className="flex w-[75.6px] items-center h-[20px] gap-[4px] lg:w-[97.6px]"> <Calicon className='w-[20px]' /> <h1 className="text-[12px] text-[#979797]">{el.release}</h1> </div>
                                 <div className="flex w-[75.6px] justify-center items-center h-[25px] gap-[4px] lg:w-[97.6px]"> <Micon className='w-[20px] h-[20px]' />
@@ -301,8 +320,8 @@ export default function GamesByFilter() {
                             </div>
 
                             <div className="flex flex-col items-center justify-center lg:justify-between lg:flex-row w-[151.2px] h-[25px] md:w-[85px] md:h-[52px] md:gap-[8px] lg:w-[207.2px] lg:h-[25px]">
-                                <div className="flex justify-center items-center md:w-[85px] md:h-[25px] gap-[8px]"> {el.disprice ? <del className="text-[#979797] text-[12px]"> {el.price + "$"}</del> : <h1 className="text-[16px]"> {el.price + "$"} </h1> } {el.disprice && <h1 className="text-[16px]"> {el.disprice + "$"} </h1>}  <h1 className="bg-[#FF5733] text-[10px] w-[25px] h-[14px] font-extralight text-center rounded-md"> {Math.round(((el.price - el.disprice) / el.price) * 100) + "$"} </h1>  </div>
-                                <div onClick={()=>{navigate(`/Games/${el.documentId}`)}} className="hidden md:flex justify-center items-center md:gap-[4px] md:w-[67px] md:h-[19px]"><h1 className="text-[12px] cursor-pointer">Buy Now</h1> <Trendarrow className='w-[15px]' /> </div>
+                                <div className="flex justify-center items-center md:w-[85px] md:h-[25px] gap-[8px]"> {el.disprice ? <del className="text-[#979797] text-[12px]"> {el.price + "$"}</del> : <h1 className="text-[16px]"> {el.price + "$"} </h1>} {el.disprice && <h1 className="text-[16px]"> {el.disprice + "$"} </h1>}  {el.disprice && <h1 className="bg-[#FF5733] text-[10px] w-[25px] h-[14px] font-extralight text-center rounded-md"> {Math.round(((el.price - el.disprice) / el.price) * 100) + "%"} </h1>}  </div>
+                                <div onClick={() => { navigate(`/Games/${el.documentId}`) }} className="hidden md:flex justify-center items-center md:gap-[4px] md:w-[67px] md:h-[19px]"><h1 className="text-[12px] cursor-pointer">Buy Now</h1> <Trendarrow className='w-[15px]' /> </div>
                             </div>
 
                         </div>
