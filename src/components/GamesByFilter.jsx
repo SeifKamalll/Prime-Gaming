@@ -301,7 +301,7 @@ export default function GamesByFilter() {
                             </div>
 
                             <div className="flex flex-col items-center justify-center lg:justify-between lg:flex-row w-[151.2px] h-[25px] md:w-[85px] md:h-[52px] md:gap-[8px] lg:w-[207.2px] lg:h-[25px]">
-                                <div className="flex justify-center items-center md:w-[85px] md:h-[25px] gap-[8px]"> <del className="text-[#979797] text-[12px]"> {el.price + "$"}</del> <h1 className="text-[16px]"> {el.disprice + "$"} </h1> <h1 className="bg-[#FF5733] text-[10px] w-[25px] h-[14px] font-extralight text-center rounded-md"> {Math.round(((el.price - el.disprice) / el.price) * 100) + "$"} </h1>  </div>
+                                <div className="flex justify-center items-center md:w-[85px] md:h-[25px] gap-[8px]"> {el.disprice ? <del className="text-[#979797] text-[12px]"> {el.price + "$"}</del> : <h1 className="text-[16px]"> {el.price + "$"} </h1> } {el.disprice && <h1 className="text-[16px]"> {el.disprice + "$"} </h1>}  <h1 className="bg-[#FF5733] text-[10px] w-[25px] h-[14px] font-extralight text-center rounded-md"> {Math.round(((el.price - el.disprice) / el.price) * 100) + "$"} </h1>  </div>
                                 <div onClick={()=>{navigate(`/Games/${el.documentId}`)}} className="hidden md:flex justify-center items-center md:gap-[4px] md:w-[67px] md:h-[19px]"><h1 className="text-[12px] cursor-pointer">Buy Now</h1> <Trendarrow className='w-[15px]' /> </div>
                             </div>
 
