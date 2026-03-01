@@ -11,7 +11,7 @@ export default function SingleGame() {
   const [loading, setLoading] = useState(true);
 
   const { addToCart } = useCart();
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -144,7 +144,7 @@ const navigate = useNavigate();
               </div>
 
               <div className="flex flex-col gap-4">
-                <button onClick={() =>{ addToCart(game);}} className="transition py-4 rounded-2xl font-bold cursor-pointer bg-[#FF5733] hover:bg-gray-950 border border-[#FF5733] text-white">
+                <button onClick={() => { addToCart(game); }} className="transition py-4 rounded-2xl font-bold cursor-pointer bg-[#FF5733] hover:bg-gray-950 border border-[#FF5733] text-white">
                   Add To Cart
                 </button>
 

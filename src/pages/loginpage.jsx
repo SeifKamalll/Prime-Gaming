@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import * as Yup from "Yup";
+import * as Yup from "yup";
 import { domain } from "../store";
 
 export default function Loginpage() {
