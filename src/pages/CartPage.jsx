@@ -26,9 +26,9 @@ export default function CartPage() {
     return (
         <div className="container mx-auto flex flex-col items-center px-4 pb-[15px] lg:py-[40px]">
             <div className="w-full flex flex-col lg:flex-row justify-center gap-8 pt-20">
-                <div className="w-full max-h-[500px] flex flex-col gap-[30px]">
+                <div className="w-full max-h-[600px] flex flex-col gap-[30px]">
                     <h1 className="text-[24px] leading-[24px] tracking-normal font-semibold">Shopping Cart</h1>
-                    <div className="flex flex-col gap-[30px] overflow-auto">
+                    <div className="flex flex-col gap-3 overflow-auto">
                         {items.map((el) => (
                             <CartItem key={el.documentId} game={el} />
                         ))}
@@ -50,18 +50,18 @@ export default function CartPage() {
                     <div className="flex flex-col gap-4">
                         <div className="flex justify-between">
                             <span className="font-semibold text-[18px]">Subtotal</span>
-                            <span className="font-semibold">{total}$</span>
+                            <span className="font-semibold">{total} <span className='text-[#FF5733]'>$</span></span>
                         </div>
 
                         <div className="flex justify-between">
                             <span className="text-[#6B6B6B] font-medium">Estimated Tax</span>
-                            <span className="font-semibold">{(0.14 * total)}$</span>
+                            <span className="font-semibold">{Math.round(0.14 * total *100) /100 } <span className='text-[#FF5733]'>$</span></span>
                         </div>
 
 
                         <div className="flex justify-between pt-2">
                             <span className="font-semibold text-[18px]">Total</span>
-                            <span className="font-semibold text-[18px]">{Math.round(1.14 * total)}$</span>
+                            <span className="font-semibold text-[18px]">{Math.round(1.14 * total * 100 ) /100} <span className='text-[#FF5733]'>$</span></span>
                         </div>
                     </div>
                     <button onClick={CheckOut} className="w-full btn rounded-lg h-[56px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white">Checkout</button>

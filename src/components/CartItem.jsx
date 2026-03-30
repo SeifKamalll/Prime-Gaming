@@ -5,14 +5,14 @@ export default function CartItem({ game }) {
     const { incrmentQty, decrmentQty, removeFromCart } = useCart();
 
     return (
-        <div className="flex w-full h-[120px] md:h-[130px] gap-4 items-center bg-gray-950/40 rounded-lg p-1">
+        <div className="flex w-full h-[120px] md:h-[130px] gap-2 md:gap-4 items-center bg-gray-950/40 rounded-lg p-1 no-scrollbar">
             <div className="h-full w-[30%] md:w-[20%] border-[#FF5733] border rounded-xl overflow-hidden">
-                <img className="w-full h-full object-cover object-center" src={game.cover ? domain + game.cover?.url : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'} alt="" />
+                <img className="w-35 h-35 object-cover object-center" src={game.cover ? domain + game.cover?.url : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'} alt="" />
             </div>
             <div className="flex items-center h-full w-[70%] md:w-[80%] gap-5 justify-between p-2">
                 <div className="h-full flex flex-col justify-between ">
                     <h1 className="font-normal text-[14px] md:text-[16px] tracking-normal">{game.name}</h1>
-                    <h1 className="font-normal text-[14px] md:text-[14px] tracking-normal">Price : {game.disprice ? game.disprice : game.price}$</h1>
+                    <h1 className="font-normal text-[14px] md:text-[14px] tracking-normal">Price : {game.disprice ? game.disprice : game.price} <span className='text-[#FF5733]'>$</span></h1>
                 </div>
                 <div className="h-full flex flex-col justify-between">
                     <div className="flex justify-center items-center gap-8 md:gap-9">
