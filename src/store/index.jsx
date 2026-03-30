@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 import { create } from "zustand";
 
-export const domain = 'https://strapi-headless-cms-for-prime-gaming-project-production.up.railway.app';
+export const domain = 'http://localhost:1337';
 
 
 const useGameStore = create((set) => ({
