@@ -201,7 +201,7 @@ export default function GamesByFilter() {
 
 
     return (
-        <div className='flex flex-col items-center w-[382px] h-[1493px] gap-[24px] md:w-[884px] md:h-[1221px] md:gap-[32px] lg:w-[1200px] lg:h-[1301px]'>
+        <div className={`flex flex-col px-2 md:px-40 items-center w-full gap-[24px] md:h-[1221px] md:gap-[32px] lg:h-[1301px]` + (isMobile ? `h-[866px]` : `h-[1493px]`)}>
             {/* Header */}
             <div className='flex flex-col justify-center items-center w-full h-[92px] gap-[4px] md:h-[67px]'>
                 <h1 className='text-[24px]'>Games By Filter</h1>
@@ -210,7 +210,7 @@ export default function GamesByFilter() {
             {/* Filters */}
             <div className={isMobile ? `flex flex-col items-center w-full h-[68px] gap-[16px] pl-[12px]` : `flex flex-col items-center w-full h-[701px] gap-[24px] md:h-[350px] md:gap-[32px]`}>
                 {/* Search */}
-                <div className="flex items-center w-full h-[48px] gap-[16px] pl-[12px] rounded-md bg-[#181724]">
+                <div className="flex items-center w-full h-[48px] gap-[16px] md:pl-[12px] rounded-md bg-[#181724]">
                     <Searchicon className="w-[32px] h-[32px]" />
                     <input className="w-full outline-none text-[16px]" placeholder="Game Name" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 </div>

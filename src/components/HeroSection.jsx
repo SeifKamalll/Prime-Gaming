@@ -96,7 +96,7 @@ export default function HeroSection() {
 
 
   return (
-    <div className="relative flex justify-center items-center w-full h-[486px] md:h-[696px] lg:h-[860px] bg-cover bg-center " style={{ backgroundImage: activeGame ? `url(${domain + activeGame?.cover?.url})` : `url(${Geralt})` }}>
+    <div className="relative flex justify-center items-center w-full h-[486px] md:h-[696px] lg:h-[860px] bg-cover bg-center px-2 md:p-0" style={{ backgroundImage: activeGame ? `url(${domain + activeGame?.cover?.url})` : `url(${Geralt})` }}>
       <div className="absolute inset-0 bg-black/30"></div>
       <div className="absolute h-full left-0 top-0 max-w-[55%] md:bg-linear-to-r from-[#1C1B29] via-[#1C1B29] to-transparent"></div>
       <div className="absolute bottom-0 right-0 w-full h-[40%] md:bg-linear-to-t from-[#1C1B29] to-transparent"></div>
@@ -175,9 +175,9 @@ export default function HeroSection() {
 
       {/* Mobile Version */}
 
-      <div className="md:hidden flex flex-col w-full h-full gap-[48px] justify-end items-center z-40">
+      <div className="md:hidden relative flex flex-col w-full gap-[50px] h-full justify-end items-center z-40">
 
-        <div className="flex w-[382px] h-[40px] justify-between">
+        <div className="flex w-full h-[40px] justify-between">
           <button onClick={() => { changeGame('prev') }} className="cursor-pointer hover:scale-105 transition-[opacity,scale] border rounded-md p-[10px] text-[#ededed]">
             <GoArrowLeft size={20} />
           </button>
@@ -185,17 +185,17 @@ export default function HeroSection() {
             <GoArrowRight size={20} />
           </button>   </div>
 
-        <div className="flex flex-col items-center w-[382px] h-[175px] gap-[16px]">
-          <h1 className="font-bold w-full h-[50px] text-center text-[32px]">{activeGame?.name}</h1>
+          <h1 className="font-semibold text-center absolute top-80 text-[28px]">{activeGame?.name}</h1>
+        <div className="flex flex-col items-center justify-end w-full h-[175px] gap-[16px]">
 
-          <div className="flex w-full justify-center items-center h-[31px] gap-[32px]">
-            <div className="flex items-center justify-center gap-[12px] h-[31px] w-[89px]"><Micon className='w-[24px]' /> <div className="flex justify-center items-center"><h1 className="text-[20px] text-[#FFCC00]">{activeGame?.rate}</h1><h1 className="text-[#979797] text-[14px]">/100</h1></div> </div>
-            <div className="flex items-center w-[132px] h-[25px] gap-[12px]"> <Calicon className="w-[24px]" /> <h1 className="text-[16px]">{activeGame?.date}</h1> </div>
+          <div className="flex w-full justify-center items-center gap-[32px]">
+            <div className="flex items-center justify-center gap-[12px] h-[31px]"><Micon className='w-[24px]' /> <div className="flex justify-center items-center"><h1 className="text-[20px] text-[#FFCC00]">{activeGame?.rate}</h1><h1 className="text-[#979797] text-[14px]">/100</h1></div> </div>
+            <div className="flex items-center h-[25px] gap-[12px]"> <Calicon className="w-[24px]" /> <h1 className="text-[16px]">{activeGame?.date}</h1> </div>
           </div>
 
           <div className="w-full h-[44px] flex justify-center items-center gap-[12px]">
-            <button onClick={() => { navigate(`/Games/${activeGame.documentId}`) }} className="btn rounded-full w-[185px] h-[44px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white">Buy Now</button>
-            <button className="btn rounded-full border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white w-[185px] h-[44px]">Game review</button>
+            <button onClick={() => { navigate(`/Games/${activeGame.documentId}`) }} className="text-sm font-bold border rounded-full w-[185px] h-[44px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white">Buy Now</button>
+            <button className="text-sm font-bold border rounded-full border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white w-[185px] h-[44px]">Game review</button>
           </div>
 
           <div className="flex w-[161px] h-[10px] gap-[4px]">

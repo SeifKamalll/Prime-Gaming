@@ -27,7 +27,7 @@ export default function Header() {
 
     return (
 
-        <header className='fixed container top-0 z-50 justify-between flex items-center backdrop-blur-xs w-[430px] h-[64px] px-[24px] py-[12px] md:w-[1080px] md:h-[83px] md:py-[10px] md:gap-[20px] lg:w-[1440px] lg:h-[90px] lg:py-[12px]'>
+        <header className='fixed w-full container top-0 z-50 justify-between flex items-center backdrop-blur-xs p-3'>
             <div onClick={() => { navigate(`/`) }} className="cursor-pointer"> <Logo /> </div>
             <div className="hidden md:block"> <Searchicon /> </div>
             <div className='hidden items-center justify-between md:flex lg:w-[811px] lg:h-[23px] font-Vazirmatn'>
@@ -42,7 +42,7 @@ export default function Header() {
                 <button onClick={() => { navigate("/register") }} className={`${token ? "hidden" : "btn hidden md:flex rounded-full md:w-[104px] md:h-[40px] md:px-[24px] md:py-[8px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white"}`}>Sign Up</button>
                 <button onClick={() => { navigate("/login") }} className={`${token ? "hidden" : "btn hidden md:flex rounded-full md:w-[88px] md:h-[40px] md:px-[24px] md:py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white"}`}>Login</button>
                 <button onClick={Logout} className={`${token ? "btn hidden md:flex rounded-full md:w-[88px] md:h-[40px] md:px-[24px] md:py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white" : "hidden"}`}>Logout</button>
-                <button className="hover:opacity-75 transition-opacity cursor-pointer relative" onClick={() => { navigate('/Cart'); }}>
+                <button className="hidden md:block hover:opacity-75 transition-opacity cursor-pointer relative" onClick={() => { navigate('/Cart'); }}>
                     <IoCartOutline className='h-8 w-8' />
                     <div>
                         {items.length != 0 && <span className='absolute top-7 right-2 text-[#FF5733] font-bold text-xl'>{items.length}</span>}
@@ -52,11 +52,17 @@ export default function Header() {
             </div>
 
             {/* Mobile */}
-            <div className="flex justify-end items-center w-[210px] h-[40px] gap-[12px] md:hidden">
-                <button onClick={() => { navigate("/login") }} className={`${token ? "hidden" : "btn flex md:hidden rounded-full w-[88px] h-[40px] px-[24px] py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white"}`}>Login</button>
-                <button onClick={Logout} className={`${token ? "btn flex md:hidden rounded-full w-[88px] h-[40px] px-[24px] py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white" : "hidden"}`}>Logout</button>
-                <div className="md:hidden cursor-pointer"> <Searchicon /> </div>
-                <div className="md:hidden cursor-pointer"> <Mobmenu /> </div>
+            <div className="flex justify-end items-center w-full h-[40px] gap-[12px] md:hidden">
+                <button className="hover:opacity-75 transition-opacity cursor-pointer relative" onClick={() => { navigate('/Cart'); }}>
+                    <IoCartOutline className='h-8 w-8' />
+                    <div>
+                        {items.length != 0 && <span className='absolute top-7 right-2 text-[#FF5733] font-bold text-xl'>{items.length}</span>}
+                    </div>
+                </button>
+                <button onClick={() => { navigate("/login") }} className={`${token ? "hidden" : "text-sm font-bold border flex md:hidden rounded-3xl px-4 py-2 border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white"}`}>Login</button>
+                <button onClick={Logout} className={`${token ? "text-sm font-bold border flex md:hidden rounded-full w-[88px] h-[40px] px-[24px] py-[8px] border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white" : "hidden"}`}>Logout</button>
+                <div className="md:hidden cursor-pointer"> <Searchicon className="w-8" /> </div>
+                <div className="md:hidden cursor-pointer"> <Mobmenu className="w-10 h-10" /> </div>
             </div>
         </header>
     )

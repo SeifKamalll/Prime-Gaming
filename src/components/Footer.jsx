@@ -10,8 +10,8 @@ import Mail from "../icons/lastmail.svg?react";
 
 export default function Footer() {
     return (
-        <div className="flex justify-center items-center bg-[#171621] w-full h-[707.5px] md:h-[343.5px] lg:h-[366.5px]">
-            <div className="flex flex-col md:flex-row bg-[#171621] w-[382px] h-[643.5px] gap-[24px] md:w-[884px] md:h-[223.5.5px] md:gap-[12px] lg:w-[1200px] lg:h-[246.5px]">
+        <div className="flex justify-center items-center bg-[#171621] w-full h-[707.5px] md:h-[343.5px] lg:h-[366.5px] px-2">
+            <div className="flex flex-col justify-center md:flex-row bg-[#171621] w-full h-[643.5px] gap-[24px] md:h-[223.5.5px] md:gap-[12px] lg:h-[246.5px]">
                 {/* First Section */}
                 <div className="flex flex-col justify-center w-full h-[201.5px] gap-[12px] md:w-[311px] md:h-[223.5px] lg:w-[493px] lg:h-[246.5px] lg:gap-[24px]">
                     <div className="flex items-center w-full h-[57px] gap-[24px] lg:h-[66px]">

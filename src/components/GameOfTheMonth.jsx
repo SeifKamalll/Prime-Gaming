@@ -30,37 +30,38 @@ export default function GameOfTheMonth() {
 
 
     return (
-        <div className="flex flex-col w-[382px] h-[1920px] gap-[24px] md:w-[884px] md:h-[847px] lg:w-[1200px] lg:h-[856px] lg:gap-[32px]">
+        <div className="flex flex-col justify-center items-center w-full h-[1920px] gap-[24px] md:h-[847px] lg:h-[856px] lg:gap-[32px] px-2 md:p-0">
             {/* Header Text */}
             <div className="flex w-full h-[38px] lg:px-[120px] justify-center items-center"> <h1 className="text-[24px]">Game Of The Month</h1> </div>
             {/* Game Details */}
-            <div className="flex flex-col md:flex-row w-full h-[905px] md:h-[452px] lg:h-[457px] gap-[24px] lg:gap-[36px]">
+            <div className="flex flex-col md:flex-row md:justify-center w-full h-[905px] md:h-[452px] lg:h-[457px] gap-[24px] lg:gap-[36px]">
                 {/* Left Div / in Mobile First */}
                 <div className="flex flex-col w-full h-[490px] md:w-[430px] md:h-[452px] lg:w-[582px] lg:h-[457px] gap-[16px]">
                     <div className="flex flex-col w-full h-[193px] gap-[8px] md:h-[171px] lg:h-[189px]">
                         <h1 className="text-[20px]">Black Myth Wukong</h1>
                         <h1 className="text-[14px] capitalize text-justify font-extralight lg:text-[16px]">Black Myth: Wukong is an action RPG inspired by the legendary Chinese novel "Journey to the West." The game takes players on an epic journey as the Monkey King, Wukong, battling through mythological creatures and mastering magical abilities. Featuring stunning visuals, challenging combat, and an immersive world, Black Myth: Wukong aims to set a new standard for action RPGs.</h1>
                     </div>
-                    <div className="flex flex-col w-full h-[281px] gap-[12px] lg:gap-[16px] md:w-[430px] md:h-[265px] lg:w-[582px] lg:h-[252px]">
-                        <div className="flex w-full md:items-center h-[149px] md:h-[133px] lg:h-[108px] gap-[28px]">
-                            <div className="flex flex-col md:justify-between w-[177px] h-[102px] gap-[16px] md:gap-0 md:w-[201px] md:h-[133px] lg:w-[277px] lg:h-[108px]"> <div className="flex w-full gap-[12px]"> <Micon /> <div className="flex items-center"><h1 className="text-[24px] text-[#FFCC00]">{game?.rate}</h1><h1 className="text-[#979797] text-[16px]">/100</h1> </div> </div>
-                                <div className="flex items-center w-full h-[32px] gap-[12px]"> <Calicon className="w-[32px]" /> <h1 className="text-[14px] font-light">{game?.date}</h1> </div>
+                    <div className="flex flex-col items-center justify-center w-full h-[281px] gap-[12px] lg:gap-[16px] md:w-[430px] md:h-[265px] lg:w-[582px] lg:h-[252px]">
+                        <div className="flex w-full justify-center md:items-center h-[149px] md:h-[133px] lg:h-[108px] gap-[28px]">
+                            <div className="flex flex-col w-[177px] h-full gap-15 md:jus md:gap-7 md:w-[201px] md:h-[133px] lg:w-[277px] lg:h-[108px]">
+                                <div className="flex w-full gap-[12px]"> <Micon className="w-[28px] md:w-[32px]" /> <div className="flex items-center"><h1 className="text-[24px] text-[#FFCC00]">{game?.rate}</h1><h1 className="text-[#979797] text-[16px]">/100</h1> </div> </div>
+                                <div className="flex items-center w-full h-[32px] gap-[12px]"> <Calicon className="w-[28px] md:w-[32px]" /> <h1 className="text-[14px] font-light">{game?.date}</h1> </div>
                             </div>
 
-                            <div className="flex flex-col items-center md:justify-between w-[177px] h-full gap-[16px] md:w-[201px] md:gap-0 lg:w-[277px]">
-                                <div className="availableFor flex flex-col items-center w-full h-[79px] lg:h-[54px]"> <h1 className="text-[20px]">Available For:</h1> <h1 className="text-[16px] text-[#979797]"> {game?.platforms?.slice(0, 3).map((el) => (el.name)).join(" - ")} </h1> </div>
-                                <div className="Genre flex flex-col items-center w-full h-[54px]"> <h1 className="text-[20px]">Genre:</h1> <h1 className="text-[16px] text-[#979797]">{game?.genres?.map((el) => el.name).join(" ")}</h1> </div>
+                            <div className="flex flex-col items-center justify-between h-full gap-[16px] md:w-[201px] md:gap-0 lg:w-[277px]">
+                                <div className="availableFor flex flex-col items-center w-full h-[79px] lg:h-[54px]"> <h1 className="text-[16px] md:text-[20px]">Available For:</h1> <h1 className="text-[16px] text-[#979797]"> {game?.platforms?.slice(0, 3).map((el) => (el.name)).join(" - ")} </h1> </div>
+                                <div className="Genre flex flex-col items-center w-full h-[54px]"> <h1 className="text-[16px] md:text-[20px]">Genre:</h1> <h1 className="text-[16px] text-[#979797]">{game?.genres?.map((el) => el.name).join(" ")}</h1> </div>
                             </div>
                         </div>
-                        <div className="platforms w-full flex flex-wrap h-[68px] gap-[8px]">
+                        <div className="platforms w-full flex justify-center flex-wrap gap-[8px]">
                             {game?.platforms?.map((el, i) => (
-                                <button key={el.id} className="w-[187px] h-[30px] md:w-[211px] lg:w-[287px] px-[20px] py-[4px] btn btn-outline rounded-box text-[16px] text-[#979797]">{el.name}</button>
+                                <button key={el.id} className="w-[160px] h-[30px] md:w-[211px] lg:w-[287px] btn btn-outline rounded-box text-[16px] text-[#979797]">{el.name}</button>
                             ))}
 
                         </div>
-                        <div className="buttons flex w-full h-[40px] gap-[12px] lg:h-[44px]">
-                            <button onClick={()=>{navigate(`/Games/${game.documentId}`)}} className="btn rounded-full bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white w-[185px] h-full md:w-[209px] lg:w-[285px] px-[24px] py-[8px] lg:px-[36px]">Buy Now</button>
-                            <button className="btn rounded-full border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white w-[185px] h-full md:w-[209px] lg:w-[285px] px-[24px] py-[8px] lg:px-[36px]">Game review</button>
+                        <div className="buttons flex justify-center w-full h-[40px] gap-[12px] lg:h-[44px]">
+                            <button onClick={()=>{navigate(`/Games/${game.documentId}`)}} className="text-sm font-semibold md:text-base md:btn rounded-full bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white w-[160px] h-full md:w-[209px] lg:w-[285px] lg:px-[36px]">Buy Now</button>
+                            <button className="text-sm font-semibold md:text-base md:btn rounded-full border border-[#FF5733] text-[#FF5733] bg-transparent hover:bg-gray-950 hover:text-white w-[160px] h-full md:w-[209px] lg:w-[285px] lg:px-[36px]">Game review</button>
 
                         </div>
                     </div>
@@ -94,7 +95,7 @@ export default function GameOfTheMonth() {
                 </div>
             </div>
             {/* System Requirments */}
-            <div className="flex flex-col md:flex-row w-full h-[929px] gap-[24px] md:h-[309px] md:gap-[36px] lg:h-[297px]">
+            <div className="flex flex-col md:flex-row md:justify-center w-full h-[929px] gap-[24px] md:h-[309px] md:gap-[36px] lg:h-[297px]">
                 <div className="firstSec flex flex-col w-full h-[286px] gap-[12px] md:w-[270.67px] md:h-full lg:w-[376px]">
                     <h1 className="text-[16px] lg:text-[20px]"><span className="text-[#FF5733]">Minimum</span> System Requirments</h1>
                     <div className="flex flex-col w-full h-[249px] md:h-[272px] lg:h-[249px] gap-[8px]">

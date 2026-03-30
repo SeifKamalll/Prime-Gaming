@@ -8,7 +8,7 @@ export default function UltimateGaming() {
 
 
     return (
-        <div className="flex flex-col md:flex-row w-[382px] h-[904px] gap-[16px] md:w-[884px] md:h-[391px] lg:w-[1200px] lg:h-[372px] lg:gap-[24px]">
+        <div className="flex flex-col md:justify-center md:flex-row w-full h-[904px] gap-[16px] md:h-[391px] lg:h-[372px] lg:gap-[24px] px-2 md:p-0">
             {/* Left or Top(Mobile) Section */}
             <div className="flex flex-col items-center w-full h-[516px] gap-[12px] md:w-[434px] md:h-full lg:w-[588px] lg:gap-[16px]">
                 <h1 className="w-full h-[31px] md:h-[38px] text-center md:text-left text-[20px] md:text-[24px]">Unlock the Ultimate <span className="text-[#FF5733]">Gaming Experience</span></h1>

@@ -49,7 +49,7 @@ export default function Reviews() {
     }, []);
 
     return (
-        <div className="flex flex-col justify-center w-full h-[650px] gap-[24px] md:w-[884px] md:h-[895px] lg:w-[1200px] lg:h-[563px] lg:gap-[32px]">
+        <div className="flex flex-col justify-center items-center w-full h-[650px] gap-[24px] md:h-[895px] lg:h-[563px] lg:gap-[32px] px-2 md:p-0">
             {/* Game Reviews Text & Arrows Control */}
             <div className='flex justify-center items-center h-[36px] w-full md:h-[51px] lg:max-w-[1200px] lg:h-[51px] '>
 
@@ -80,7 +80,7 @@ export default function Reviews() {
 
             </div>
             {/* Second Part  */}
-            <div className="flex overflow-x-auto no-scrollbar w-full h-[590px] md:h-[820px] lg:h-[480px] gap-[16px] md:gap-[12px] md:flex-col lg:grid lg:grid-cols-2">
+            <div className="flex overflow-x-auto no-scrollbar w-full h-[590px] md:h-[820px] lg:h-[480px] gap-[16px] md:gap-[12px] md:flex-col lg:grid lg:grid-cols-2 lg:px-40">
                 {/* Cards */}
                 {(isMobile ? reviews : visibleReviews)?.map((el, i) => (
                     <div key={el.id} className="flex flex-col md:flex-row w-[310px] h-full gap-[10px] p-[8px] md:w-full md:h-[196px] lg:w-[588px] lg:h-[228px] border border-[#9763AD] rounded-xl">

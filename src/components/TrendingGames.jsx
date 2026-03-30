@@ -48,7 +48,7 @@ export default function TrendingGames() {
 
 
     return (
-        <div className='flex flex-col justify-center w-full md:w-[884px] lg:w-[1200px] items-center gap-[24px] md:h-[405px] lg:h-[453px] lg:gap-[32px]'>
+        <div className='flex flex-col justify-center w-full items-center gap-[24px] md:h-[405px] lg:h-[453px] lg:gap-[32px] px-2 md:p-0'>
             <div className='flex justify-center items-center h-[36px] w-full md:h-[51px] lg:max-w-[1200px] lg:h-[51px] '>
 
                 <div className="flex w-[280px] h-[31px] md:w-[812px] md:h-[38px] md:w-[704px] lg:w-[1200px] md:h-[40px] lg:gap-[48px] lg:h-[44px]">
@@ -77,7 +77,7 @@ export default function TrendingGames() {
 
 
             </div>
-            <div className="flex w-[406px] no-scrollbar overflow-x-auto overflow-y-hidden md:w-full h-[297px] gap-[16px] md:max-w-[884px] md:h-[330px] md:gap-[12px] lg:w-[1200px] lg:max-w-[1200px] lg:h-[370px]">
+            <div className="flex no-scrollbar overflow-x-auto overflow-y-hidden w-full h-[297px] gap-[16px] md:h-[330px] md:gap-[12px] lg:h-[370px] md:px-40">
                 {(isMobile ? trending : visibleGames)?.map((el, index) => (
                     <div key={el.id}  className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
                         <img src={domain + el.image?.[0]?.url} alt={el.name} onClick={()=>{navigate(`/Games/${el.documentId}`)}} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />

@@ -11,7 +11,7 @@ import UpcomingGames from "../components/UpcomingGames";
 export default function HomePage() {
 
   return (
-    <div className='w-full flex flex-col items-center w-[430px] md:w-[1080px] lg:w-[1440px] gap-[60px] md:gap-[80px] overflow-hidden'>
+    <div className='w-full flex flex-col items-center gap-[60px] md:gap-[80px] overflow-hidden'>
     <HeroSection/>
     <GameCategories/>
     <TrendingGames/>

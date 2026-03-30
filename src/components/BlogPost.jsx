@@ -52,7 +52,7 @@ export default function BlogPost() {
     }, []);
 
     return (
-        <div className="flex flex-col w-[382px] h-[303px] gap-[24px] md:w-[884px] md:h-[455px] lg:w-[1200px]">
+        <div className="flex flex-col items-center w-full h-[303px] gap-[24px] md:h-[455px] px-2 md:p-0">
             {/* Text Line */}
             <div className='flex justify-center items-center h-[36px] w-full md:h-[51px] lg:max-w-[1200px] lg:h-[51px] '>
 
