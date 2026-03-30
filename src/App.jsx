@@ -6,12 +6,14 @@ import Register from './pages/Register';
 import SingleGame from './pages/SingleGame';
 import CartPage from './pages/CartPage';
 import { Toaster } from 'react-hot-toast';
+import ScrollToTop from './components/ScrollTop';
 
 export default function App() {
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} />
       <BrowserRouter>
+      <ScrollToTop />
         <Routes>
           <Route path='/' element={<MainLayout />}>
             <Route index element={<HomePage />} />
