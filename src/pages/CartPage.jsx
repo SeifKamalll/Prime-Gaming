@@ -50,18 +50,18 @@ export default function CartPage() {
                     <div className="flex flex-col gap-4">
                         <div className="flex justify-between">
                             <span className="font-semibold text-[18px]">Subtotal</span>
-                            <span className="font-semibold">${total}</span>
+                            <span className="font-semibold">{total}$</span>
                         </div>
 
                         <div className="flex justify-between">
                             <span className="text-[#6B6B6B] font-medium">Estimated Tax</span>
-                            <span className="font-semibold">${(0.14 * total)}</span>
+                            <span className="font-semibold">{(0.14 * total)}$</span>
                         </div>
 
 
                         <div className="flex justify-between pt-2">
                             <span className="font-semibold text-[18px]">Total</span>
-                            <span className="font-semibold text-[18px]">${Math.round(1.14 * total)}</span>
+                            <span className="font-semibold text-[18px]">{Math.round(1.14 * total)}$</span>
                         </div>
                     </div>
                     <button onClick={CheckOut} className="w-full btn rounded-lg h-[56px] bg-[#FF5733] hover:bg-gray-950 border-[#FF5733] text-white">Checkout</button>
