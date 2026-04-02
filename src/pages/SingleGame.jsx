@@ -52,7 +52,7 @@ export default function SingleGame() {
           <div className="w-full">
 
             {/* Main Image */}
-            <div className="w-full h-[380px] md:h-[450px] rounded-3xl overflow-hidden bg-[#2A2838]">
+            <div className="w-full h-[380px] md:h-[420px] rounded-3xl overflow-hidden bg-[#2A2838]">
               <img
                 src={
                   game?.screenshots?.length
@@ -66,19 +66,24 @@ export default function SingleGame() {
 
             {/* Thumbnails */}
             <div className="grid grid-cols-4 gap-4 mt-6">
-              {game?.screenshots?.slice(0, 4).map((el, i) => (
+              {game?.screenshots?.length 
+              ? game?.screenshots?.slice(0, 4).map((el, i) => (
                 <img
-                  key={i}
-                  src={domain + el.url}
-                  onClick={() =>{setCurrentIndex(i); setIsAuto(false);}}
-                  onMouseLeave={() => { i === currentIndex && setIsAuto(true) }}
-                  className={`h-[90px] w-full object-cover rounded-xl border cursor-pointer transition 
-        ${currentIndex === i
-                      ? "border-[#FF5733]"
-                      : "border-white/10 hover:border-[#FF5733]"
+                key={i}
+                src={domain + el.url}
+                onClick={() =>{setCurrentIndex(i); setIsAuto(false);}}
+                onMouseLeave={() => { i === currentIndex && setIsAuto(true) }}
+                className={`h-[90px] w-full object-cover rounded-xl border cursor-pointer transition 
+                  ${currentIndex === i
+                    ? "border-[#FF5733]"
+                    : "border-white/10 hover:border-[#FF5733]"
                     }`}
-                />
-              ))}
+                    />
+                  ))
+              : [1, 2, 3, 4].map((i) => (
+                 <div key={i}
+                 className="h-[90px] bg-[#2A2838] rounded-xl border border-white/10 hover:border-[#FF5733] transition cursor-pointer flex justify-center items-center" >No Image</div> ))}
+                
             </div>
           </div>
 
