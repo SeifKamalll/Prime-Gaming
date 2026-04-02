@@ -9,15 +9,29 @@ export default function SingleGame() {
   const { Gameid } = useParams();
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAuto, setIsAuto] = useState(true);
+
+  useEffect(() => {
+    if (!game?.screenshots?.length || !isAuto) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) =>
+        (prev + 1) % game.screenshots.length
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [game, isAuto]);
 
   const { addToCart } = useCart();
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
     axios.get(domain + `/api/games/${Gameid}`, { params: { populate: "*" } })
       .then((res) => {
         setGame(res.data.data);
+        console.log(res.data.data)
         setLoading(false);
       }).catch((err) => {
         console.log(err);
@@ -38,9 +52,13 @@ export default function SingleGame() {
           <div className="w-full">
 
             {/* Main Image */}
-            <div className="w-full h-[420px] md:h-[520px] rounded-3xl overflow-hidden bg-[#2A2838]">
+            <div className="w-full h-[380px] md:h-[450px] rounded-3xl overflow-hidden bg-[#2A2838]">
               <img
-                src={domain + game?.cover?.url}
+                src={
+                  game?.screenshots?.length
+                    ? domain + game.screenshots[currentIndex]?.url
+                    : domain + game?.cover?.url
+                }
                 alt={game?.name}
                 className="w-full h-full object-cover"
               />
@@ -48,10 +66,17 @@ export default function SingleGame() {
 
             {/* Thumbnails */}
             <div className="grid grid-cols-4 gap-4 mt-6">
-              {[1, 2, 3, 4].map((i) => (
-                <div
+              {game?.screenshots?.slice(0, 4).map((el, i) => (
+                <img
                   key={i}
-                  className="h-[90px] bg-[#2A2838] rounded-xl border border-white/10 hover:border-[#FF5733] transition cursor-pointer"
+                  src={domain + el.url}
+                  onClick={() =>{setCurrentIndex(i); setIsAuto(false);}}
+                  onMouseLeave={() => { i === currentIndex && setIsAuto(true) }}
+                  className={`h-[90px] w-full object-cover rounded-xl border cursor-pointer transition 
+        ${currentIndex === i
+                      ? "border-[#FF5733]"
+                      : "border-white/10 hover:border-[#FF5733]"
+                    }`}
                 />
               ))}
             </div>
@@ -100,7 +125,7 @@ export default function SingleGame() {
                 {game?.platforms?.map((el, index) => (
                   <span
                     key={index}
-                    className="border border-[#FF5733] text-[#FF5733] px-4 py-2 rounded-full text-sm"
+                    className="border border-[#FF5733] text-[#FF5733] px-4 py-2 rounded-full text-sm cursor-pointer hover:bg-black"
                   >
                     {el.name}
                   </span>
@@ -117,7 +142,7 @@ export default function SingleGame() {
                 {game?.genres?.map((el, index) => (
                   <span
                     key={index}
-                    className="bg-white/5 border border-white/10 px-4 py-2 rounded-full text-sm"
+                    className="bg-white/5 border border-white/10 px-4 py-2 rounded-full text-sm cursor-pointer hover:border-[#FF5733]"
                   >
                     {el.name}
                   </span>
@@ -131,10 +156,10 @@ export default function SingleGame() {
               <div className="flex items-center justify-between mb-8">
                 <div>
                   <p className="line-through text-gray-500 text-sm">
-                    ${game?.price}
+                    {game?.price}$
                   </p>
                   <p className="text-4xl font-black">
-                    ${game?.disprice}
+                    {game?.disprice}$
                   </p>
                 </div>
 
