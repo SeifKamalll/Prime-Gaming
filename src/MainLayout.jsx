@@ -18,8 +18,8 @@ export default function MainLayout() {
       wheelMultiplier: 1, 
       smoothWheel: true 
     }}>
-        <Header/>
     <div className="w-full flex flex-col items-center font-Vazirmatn bg-[#1C1B29]">
+        <Header/>
 
          {/* The Progress Bar Container */}
         <div className="hidden md:block fixed right-5 top-[35dvh] w-[6px] h-[200px] z-50 bg-gray-700/30 rounded-full">
@@ -33,8 +33,8 @@ export default function MainLayout() {
         </div>
         <Outlet />
 
-    </div>
         <Footer/>
+    </div>
     </ReactLenis>
   );
 }

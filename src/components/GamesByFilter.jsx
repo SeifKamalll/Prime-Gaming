@@ -306,7 +306,7 @@ export default function GamesByFilter() {
             </div>
             {/* Games */}
             <div className='flex flex-col relative items-center w-full h-[682px] gap-[24px] md:h-[740px] md:gap-[20px] lg:h-[820px]'>
-                <div className={`grid grid-cols-2 md:grid-cols-5 ${isViewAll ? "no-scrollbar overflow-auto h-[658px] md:h-[720px] lg:h-[800px]" : "h-[618px] md:h-[684px] lg:h-[760px]"} w-full gap-x-[16px] gap-y-[24px] md:gap-x-[12px] md:gap-y-[20px] lg:gap-x-[16px]`}>
+                <div {...(isViewAll && { 'data-lenis-prevent-wheel': true })} className={`grid grid-cols-2 md:grid-cols-5 ${isViewAll ? "no-scrollbar overflow-auto h-[658px] md:h-[720px] lg:h-[800px]" : "h-[618px] md:h-[684px] lg:h-[760px]"} w-full gap-x-[16px] gap-y-[24px] md:gap-x-[12px] md:gap-y-[20px] lg:gap-x-[16px]`}>
                     {(!isViewAll ? filteredGames?.slice(0, limit) : filteredGames)?.map((el, i) => (
                         <div key={el.id} className="flex flex-col border border-[#9763AD] rounded-xl items-center w-[167.2px] h-[297px] gap-[12px] p-[8px] md:h-[330px] lg:w-[227.2px] lg:h-[370px] lg:p-[10px] hover:scale-98 transition-[opacity,scale]">
                             <img src={domain + el.image?.[0]?.url} alt={el.name} onClick={() => { navigate(`/Games/${el.documentId}`) }} className="w-[151.2px] h-[178px] md:h-[184px] cursor-pointer lg:w-[207.2px] lg:h-[239px]" />
