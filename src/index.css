@@ -24,6 +24,19 @@
 
 /* @custom-variant dark (&:where(.dark, .dark *)); */
 
+/* This hides it globally for the whole site */
+html,
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+
 /* This hides the scrollbar while keeping the scroll functionality */
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */

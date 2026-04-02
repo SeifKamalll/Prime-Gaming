@@ -85,7 +85,7 @@ export default function GameCategories() {
           return (
             <div
               key={el.id}
-              className={`relative rounded-xl md:transition-transform md:duration-300 md:ease-out md:hover:-translate-y-2 min-w-[280.5px] w-[573px] md:w-full md:max-w-[884px] h-[194px] bg-center bg-[#1C1B29] cursor-pointer overflow-hidden ${isBig ? "col-span-2" : ""
+              className={`relative rounded-xl md:transition-transform md:duration-300 md:ease-out md:hover:-translate-y-2 min-w-[280.5px] w-[573px] md:w-full md:max-w-[884px] h-[194px] bg-center bg-cover bg-[#1C1B29] cursor-pointer overflow-hidden ${isBig ? "col-span-2" : ""
                 }`}
               style={{ backgroundImage: `url(${domain + el.cover?.url})` }}
             >
